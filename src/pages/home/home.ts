@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage } from 'ionic-angular';
 import { loginDTO } from '../../models/login.dto';
+import { loginService } from '../../Service/login.service';
 
 @IonicPage()
 @Component({
@@ -13,13 +14,21 @@ export class HomePage {
     email:"",
     senha:""
   }
-
-  constructor(public navCtrl: NavController) {
+  
+  token : string;
+  constructor(public navCtrl: NavController,
+              public loginService: loginService) {
 
   }
 
   login(){
+
     console.log(this.logindto);
+    this.loginService.authenticate(this.logindto)
+      .subscribe(response => {
+        this.token = response.body.toString();
+        console.log("FUNCIONOU" + this.token);
+      })
   
   }
 
