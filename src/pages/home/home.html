@@ -7,14 +7,14 @@
     <form>
         <ion-item>
             <ion-label floating>Email</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input [(ngModel)]="logindto.email" name="email" type="text"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating>Senha</ion-label>
-            <ion-input type="password"></ion-input>
+            <ion-input [(ngModel)]="logindto.senha" name="senha" type="password"></ion-input>
         </ion-item>
         <br>
-        <button name="btnEntrar" ion-button round medium>Entrar</button>
+        <button name="btnEntrar" ion-button round medium (click)="login()">Entrar</button>
     </form>
     <button name="btnCadastrar" ion-button round medium outline>Cadastrar</button>
 </ion-content>
