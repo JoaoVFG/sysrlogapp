@@ -26,9 +26,9 @@ export class HomePage {
     console.log(this.logindto);
     this.loginService.authenticate(this.logindto)
       .subscribe(response => {
-        this.token = response.body.toString();
         console.log("FUNCIONOU" + this.token);
-      })
+      },
+      error => {})
   
   }
 
