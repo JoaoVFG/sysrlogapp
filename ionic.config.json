@@ -1,5 +1,7 @@
 {
   "name": "sysrlogapp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }

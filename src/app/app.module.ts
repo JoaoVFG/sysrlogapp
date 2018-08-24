@@ -8,17 +8,17 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { loginService } from '../Service/login.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ErrorInterceptor, ErrorInterceptorProvider } from '../interceptors/error-interceptor';
+import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
+import { storageService } from '../Service/storage.service';
 
 @NgModule({
   declarations: [
     MyApp
   ],
   imports: [
-    BrowserModule,    
+    BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -27,9 +27,10 @@ import { ErrorInterceptor, ErrorInterceptorProvider } from '../interceptors/erro
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     loginService,
-    ErrorInterceptorProvider
+    ErrorInterceptorProvider,
+    storageService
   ]
 })
-export class AppModule {}
+export class AppModule { }

@@ -22,13 +22,15 @@ export class HomePage {
   }
 
   login(){
-
-    console.log(this.logindto);
+    
     this.loginService.authenticate(this.logindto)
       .subscribe(response => {
-        console.log("FUNCIONOU" + this.token);
+        this.token = response.body.toString();
+        this.loginService.sucessfullAuthentication(this.token);      
       },
-      error => {})
+      error => {
+        
+      })
   
   }
 
