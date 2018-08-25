@@ -35,8 +35,5 @@ export class cryptService{
         return localStorage.getItem('SECRET');
     }
 	
-	eraseSecret(){
-        localStorage.removeItem('SECRET');
-    }
 
 }

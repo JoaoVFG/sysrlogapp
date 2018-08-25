@@ -21,7 +21,7 @@ export class storageService {
        	localStorage.setItem('ID_USER', this.crypt.encrypt(this.jwtHelper.decodeToken(tokenData).sub));
         localStorage.setItem('EMAIL_USER', this.crypt.encrypt(this.jwtHelper.decodeToken(tokenData).email));
         
-        console.log(this.destroySecret());
+        this.destroySecret();
     }
 
     retrieveToken() : string{
@@ -43,9 +43,8 @@ export class storageService {
     	localStorage.removeItem('ID_USER');
     }
 
-    destroySecret() : string{
+    destroySecret(){
         localStorage.removeItem('SECRET');
-        return localStorage.getItem('SECRET').toString();
     }
 
-}
+}    

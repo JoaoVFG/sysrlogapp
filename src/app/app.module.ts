@@ -12,6 +12,7 @@ import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { storageService } from '../Service/storage.service';
 import { cryptService } from '../Service/crypt.service';
 import { mapConfigService } from '../Service/mapconfig.service';
+import { AuthInterceptor } from '../interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -31,10 +32,11 @@ import { mapConfigService } from '../Service/mapconfig.service';
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     loginService,
-    ErrorInterceptorProvider,
+    AuthInterceptor,
     storageService,
     cryptService,
-    mapConfigService
+    mapConfigService,
+    ErrorInterceptorProvider,
   ]
 })
 export class AppModule { }
