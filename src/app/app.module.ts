@@ -10,6 +10,8 @@ import { loginService } from '../Service/login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { storageService } from '../Service/storage.service';
+import { cryptService } from '../Service/crypt.service';
+import { mapConfigService } from '../Service/mapconfig.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { storageService } from '../Service/storage.service';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     loginService,
     ErrorInterceptorProvider,
-    storageService
+    storageService,
+    cryptService,
+    mapConfigService
   ]
 })
 export class AppModule { }

@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { loginDTO } from "../models/login.dto";
 import { API_CONFIG } from "../Config/api.config";
 import { HttpClient } from "@angular/common/http";
-import { storageService } from "../Service/storage.service.ts"
-
+import { storageService } from "../Service/storage.service"
+ 
 @Injectable()
 export class loginService{
     
@@ -21,6 +21,6 @@ export class loginService{
     }
 
     sucessfullAuthentication(token : string){
-    	this.storage.saveToken(token);
+        this.storage.saveToken(token);
     }
 }
