@@ -12,7 +12,8 @@ import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { storageService } from '../Service/storage.service';
 import { cryptService } from '../Service/crypt.service';
 import { mapConfigService } from '../Service/mapconfig.service';
-import { AuthInterceptor } from '../interceptors/auth-interceptor';
+import { PessoaService } from '../Service/Entity/pessoa.service';
+import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -31,12 +32,13 @@ import { AuthInterceptor } from '../interceptors/auth-interceptor';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    loginService,
-    AuthInterceptor,
-    storageService,
-    cryptService,
     mapConfigService,
+    cryptService,
+    storageService,
+    loginService,
+    AuthInterceptorProvider,
     ErrorInterceptorProvider,
+    PessoaService,
   ]
 })
 export class AppModule { }

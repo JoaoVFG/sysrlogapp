@@ -17,7 +17,7 @@ export class cryptService{
 	}
 
 	decrypt(dataToDecrypt : string) : string{
-		this.initializeCryptValue();
+		//this.initializeCryptValue();
 		let secret = this.retriveSecret();
 		let bytes  = AES.decrypt(dataToDecrypt, secret.toString());
 		let decrypted = bytes.toString(enc.Utf8);

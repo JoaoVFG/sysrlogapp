@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { PessoaService } from '../../Service/Entity/pessoa.service';
+import { storageService } from '../../Service/storage.service';
+import { Pessoa } from '../../models/pessoa.dto';
 
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +12,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  pessoa : Pessoa;
+
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public pessoaService : PessoaService,
+              public storage : storageService) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+    this.pessoaService.findById(this.storage.retrieveIdUser())
+      .subscribe( response =>{
+        this.pessoa = response;
+      },
+    error => {
+      console.log(error);
+    })
   }
 
 }
