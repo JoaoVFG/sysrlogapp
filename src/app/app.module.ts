@@ -14,6 +14,7 @@ import { cryptService } from '../Service/crypt.service';
 import { mapConfigService } from '../Service/mapconfig.service';
 import { PessoaService } from '../Service/Entity/pessoa.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
+import { LoadingService } from '../Service/Components/loading.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    LoadingService,
     mapConfigService,
     cryptService,
     storageService,
