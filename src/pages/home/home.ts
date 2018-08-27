@@ -3,6 +3,7 @@ import { NavController, IonicPage } from 'ionic-angular';
 import { loginDTO } from '../../models/login.dto';
 import { loginService } from '../../Service/login.service';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
+import { cryptService } from '../../Service/crypt.service';
 
 @IonicPage()
 @Component({
@@ -20,7 +21,7 @@ export class HomePage {
   constructor(public navCtrl: NavController,
               public loginService: loginService,
               public menu: MenuController) {
-
+              
   }
 
   login(){

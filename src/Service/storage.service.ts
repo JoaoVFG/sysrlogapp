@@ -20,6 +20,7 @@ export class storageService {
         localStorage.setItem('TOKEN', this.crypt.encrypt(token));
         localStorage.setItem('ID_USER', this.crypt.encrypt(this.jwtHelper.decodeToken(tokenData).sub));
         localStorage.setItem('EMAIL_USER', this.crypt.encrypt(this.jwtHelper.decodeToken(tokenData).email));
+        this.destroySecret();
     }
 
     retrieveToken() : string{
@@ -36,9 +37,9 @@ export class storageService {
 
     
     eraseLocalStorage(){
-    	localStorage.removeItem('TOKEN');
-    	localStorage.removeItem('EMAIL_USER');
-    	localStorage.removeItem('ID_USER');
+    	localStorage.setItem('TOKEN',null);
+    	localStorage.setItem('EMAIL_USER',null);
+    	localStorage.setItem('ID_USER',null);
     }
 
     destroySecret(){

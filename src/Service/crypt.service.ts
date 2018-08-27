@@ -7,32 +7,39 @@ import { enc } from 'crypto-js'; // For characters encodages types (Utf-8, latin
 export class cryptService{
 
 	public cryptValue : string;
-	constructor(private mapConfig: mapConfigService){
+	constructor(/**private mapConfig: mapConfigService**/){
 	}
 
 	encrypt(dataToEncrypt : string) : string{
+		this.initializeCryptValue();
 		let secret = this.retriveSecret();
 		let encrypted = AES.encrypt(dataToEncrypt, secret);
+		localStorage.removeItem('SECRET');
 		return encrypted.toString();
 	}
 
 	decrypt(dataToDecrypt : string) : string{
-		//this.initializeCryptValue();
+		this.initializeCryptValue();
 		let secret = this.retriveSecret();
 		let bytes  = AES.decrypt(dataToDecrypt, secret.toString());
 		let decrypted = bytes.toString(enc.Utf8);
+		localStorage.removeItem('SECRET');
 		return decrypted;
 	}
-
+	
 	initializeCryptValue(){
-		this.mapConfig.findCrypto()
+		/**this.mapConfig.findCrypto()
 			.subscribe(response =>{
+				console.log(response.body.toString());
+				
 				localStorage.setItem('SECRET',response.body.toString());
-			})
+			})**/
+		localStorage.setItem('SECRET','123ASDFAW5E84FA96DFAS5DF1AS3D2F13f1a3d2f13we5f1335!*¨(@¨!&@(*');
 	}
 
 	retriveSecret(): string{
-        return localStorage.getItem('SECRET');
+		return localStorage.getItem('SECRET');
+		//return 'TESTESEGREDO';
     }
 	
 

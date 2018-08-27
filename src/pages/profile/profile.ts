@@ -13,11 +13,13 @@ import { Pessoa } from '../../models/pessoa.dto';
 export class ProfilePage {
 
   pessoa : Pessoa;
-
+  email : string;
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public pessoaService : PessoaService,
               public storage : storageService) {
+    
+                this.email = this.storage.retriveEmail();
   }
 
   ionViewDidLoad() {
