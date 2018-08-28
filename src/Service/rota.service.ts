@@ -12,7 +12,7 @@ export class RotaService{
 
     geraRotaJson(listaEnderecoEntregaDTO : listaEnderecoEntregaDTO){
         return this.http.post(
-            `${API_CONFIG.baseUrl}/criarotajson`,
+            `${API_CONFIG.baseUrl}/rota/criarotajson`,
             listaEnderecoEntregaDTO,
             {
                 observe: 'response',

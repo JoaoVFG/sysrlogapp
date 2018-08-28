@@ -1,0 +1,44 @@
+<ion-header>
+
+    <ion-navbar>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>
+        <ion-title>Rota</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-item>
+        <ion-label floating>CEP</ion-label>
+        <ion-input [(ngModel)]="enderecoEntrega.cep" name="enderecoCep" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>NUM</ion-label>
+        <ion-input [(ngModel)]="enderecoEntrega.numeroLogradouro" name="enderecoNum" type="text"></ion-input>
+    </ion-item>
+
+    <button name="btnEntrar" ion-button round medium (click)="addToList()">Adicionar</button>
+    <button name="btnGerar" ion-button round medium (click)="gerarRota()">Gerar Rota</button>
+
+    <ion-card *ngIf="rotaResponse?.rota">
+        <ion-item>
+            <ion-card-title>URL MAPS</ion-card-title>
+        </ion-item>
+        <button name="btnMaps" ion-button round medium (click)="abrirMaps()">Rota</button>
+    </ion-card>
+
+    <ion-card>
+        <ion-item>
+            <ion-card-title>Lista de endereços</ion-card-title>
+        </ion-item>
+        <ion-list>
+            <ion-item *ngFor="let end of listaEndereco.waypoints">
+                <h2>CEP: {{end.cep}} Numero: {{end.numeroLogradouro}}</h2>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+
+</ion-content>

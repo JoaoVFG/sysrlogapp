@@ -15,6 +15,7 @@ import { mapConfigService } from '../Service/mapconfig.service';
 import { PessoaService } from '../Service/Entity/pessoa.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { LoadingService } from '../Service/Components/loading.service';
+import { RotaService } from '../Service/rota.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { LoadingService } from '../Service/Components/loading.service';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    RotaService,
     LoadingService,
     mapConfigService,
     cryptService,
@@ -41,6 +43,7 @@ import { LoadingService } from '../Service/Components/loading.service';
     AuthInterceptorProvider,
     ErrorInterceptorProvider,
     PessoaService,
+    
   ]
 })
 export class AppModule { }
