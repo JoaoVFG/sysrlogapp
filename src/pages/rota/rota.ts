@@ -7,6 +7,7 @@ import { storageService } from '../../Service/storage.service';
 import { rotaResponse } from '../../models/rota/rotaresponse.dto';
 import { ResponsavelRegiao } from '../../models/rota/responsavelregiao.dto';
 import { LoadingService } from '../../Service/Components/loading.service';
+import { CepService } from '../../Service/Entity/cep.service';
 
 
 @IonicPage()
@@ -42,11 +43,22 @@ export class RotaPage {
               public navParams: NavParams,
               public rotaService: RotaService,
               public storage: storageService,
-              public loadingService: LoadingService) {
+              public loadingService: LoadingService,
+              public cepService: CepService) {
   }
 
   ionViewDidLoad() {
 
+  }
+  
+  validaCep(){
+    this.cepService.findByCep(this.enderecoEntrega.cep)
+      .subscribe((response) => {
+        console.log('DEU CERTO')
+        this.addToList();
+      }, error =>{
+        console.log(error);
+      })
   }
 
   addToList() {

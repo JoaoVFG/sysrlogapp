@@ -12,11 +12,11 @@ export class CepService{
     }
 
     findByCep(cep : String) : Observable<cep>{
-        return this.http.get<cep>(`${API_CONFIG.baseUrl}/cep/buscacep/` + cep);
+        return this.http.get<cep>(`${API_CONFIG.baseUrl}/ceps/buscacep/` + cep);
     }
 
     findAllCep() : Observable<cep[]>{
-        return this.http.get<cep[]>(`${API_CONFIG.baseUrl}/cep/buscacep/`);
+        return this.http.get<cep[]>(`${API_CONFIG.baseUrl}/ceps/buscacep/`);
     }
 
 }

@@ -16,6 +16,7 @@ import { PessoaService } from '../Service/Entity/pessoa.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { LoadingService } from '../Service/Components/loading.service';
 import { RotaService } from '../Service/rota.service';
+import { CepService } from '../Service/Entity/cep.service';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { RotaService } from '../Service/rota.service';
     AuthInterceptorProvider,
     ErrorInterceptorProvider,
     PessoaService,
+    CepService
     
   ]
 })

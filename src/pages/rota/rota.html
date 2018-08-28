@@ -19,7 +19,7 @@
         <ion-input [(ngModel)]="enderecoEntrega.numeroLogradouro" name="enderecoNum" type="text"></ion-input>
     </ion-item>
 
-    <button name="btnEntrar" ion-button round medium (click)="addToList()">Adicionar</button>
+    <button name="btnEntrar" ion-button round medium (click)="validaCep()">Adicionar</button>
     <button name="btnGerar" ion-button round medium (click)="gerarRota()">Gerar Rota</button>
 
     <ion-card *ngIf="rotaResponse?.rota">
