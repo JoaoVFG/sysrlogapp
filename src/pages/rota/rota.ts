@@ -8,7 +8,9 @@ import { rotaResponse } from '../../models/rota/rotaresponse.dto';
 import { ResponsavelRegiao } from '../../models/rota/responsavelregiao.dto';
 import { LoadingService } from '../../Service/Components/loading.service';
 import { CepService } from '../../Service/Entity/cep.service';
-
+import { Geolocation } from '@ionic-native/geolocation';
+import { WaypointsGoogle } from '../../models/rota/waypointsGoogle';
+declare var google;
 
 @IonicPage()
 @Component({
@@ -16,7 +18,15 @@ import { CepService } from '../../Service/Entity/cep.service';
   templateUrl: 'rota.html',
 })
 export class RotaPage {
-
+  /*
+  directionsService = new google.maps.DirectionsService();
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  map: any;
+  startPosition: any;
+  originPosition: string;
+  destinationPosition: string;
+  waypointsGoogle : WaypointsGoogle[] = [];
+  */
   listaEndereco: listaEnderecoEntregaDTO = {
     idUser: this.storage.retrieveIdUser(),
     waypoints: []
@@ -27,36 +37,39 @@ export class RotaPage {
     numeroLogradouro: ''
   };
 
-  rotaResponse : rotaResponse = {
-    rota : '',
-    responsavel : []
+  rotaResponse: rotaResponse = {
+    waypoints: '',
+    enderecoOrigem: [],
+    rota: '',
+    responsavel: []
   }
 
-  responsavelRegiao : ResponsavelRegiao = {
-    cep : '',
-    empresa :''
+  responsavelRegiao: ResponsavelRegiao = {
+    cep: '',
+    empresa: ''
   }
   
-  URL : string;
+
+  URL: string;
+
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public rotaService: RotaService,
-              public storage: storageService,
-              public loadingService: LoadingService,
-              public cepService: CepService) {
+    public navParams: NavParams,
+    public rotaService: RotaService,
+    public storage: storageService,
+    public loadingService: LoadingService,
+    public cepService: CepService) {
   }
 
   ionViewDidLoad() {
 
   }
-  
-  validaCep(){
+
+  validaCep() {
     this.cepService.findByCep(this.enderecoEntrega.cep)
       .subscribe((response) => {
-        console.log('DEU CERTO')
         this.addToList();
-      }, error =>{
+      }, error => {
         console.log(error);
       })
   }
@@ -74,16 +87,69 @@ export class RotaPage {
       .subscribe(response => {
         this.rotaResponse = JSON.parse(response.body);
         loading.dismiss();
+        //this.initializeMap();
       },
         error => {
           loading.dismiss();
           console.log(error);
         })
-    
-  }
 
-  abrirMaps(){
+  }
+  /**
+  abrirMaps() {
     window.location.assign(this.rotaResponse.rota);
   }
 
+  initializeMap() {
+    this.startPosition = new google.maps.LatLng( -23.533773, -46.625290);
+
+    const mapOptions = {
+      zoom: 18,
+      center: this.startPosition,
+      disableDefaultUI: false
+    }
+
+    this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    this.calculateRoute();
+    this.directionsDisplay.setMap(this.map);
+
+  }
+
+  calculateRoute() {
+    const request = {
+      // Pode ser uma coordenada (LatLng), uma string ou um lugar
+      origin: this.rotaResponse.enderecoOrigem,
+      destination: this.rotaResponse.enderecoOrigem,
+      waypoints: this.generateWayPoints(),
+      travelMode: 'DRIVING'
+    };
+
+    this.traceRoute(this.directionsService, this.directionsDisplay, request);
+  }
+
+  traceRoute(service: any, display: any, request: any) {
+    service.route(request, function (result, status) {
+      if (status == 'OK') {
+        display.setDirections(result);
+      }
+    });
+  }
+
+  generateWayPoints() {
+    
+    for (let i of this.rotaResponse.waypoints) {
+      this.waypointsGoogle.push({
+        location: i,
+        stopover: true
+      })
+
+      console.log(this.waypointsGoogle.toString);
+      
+      
+    }
+    return this.waypointsGoogle;
+  }
+  **/
 }
+
+

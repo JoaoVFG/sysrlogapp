@@ -52,6 +52,5 @@ export class MyApp {
 
   logout(){
     this.storage.eraseLocalStorage();
-
   }
 }
