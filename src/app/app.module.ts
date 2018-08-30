@@ -17,7 +17,6 @@ import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { LoadingService } from '../Service/Components/loading.service';
 import { RotaService } from '../Service/rota.service';
 import { CepService } from '../Service/Entity/cep.service';
-import { CepService } from '../Service/Entity/pessoa.service';
 
 @NgModule({
   declarations: [

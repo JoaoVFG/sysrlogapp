@@ -61,10 +61,10 @@ export class PessoaService{
     }
 
     deletePessoa( id : string) {
-    	return this.http.delete(`${API_CONFIG.baseUrl}/pessoa` + id);
+    	return this.http.delete(`${API_CONFIG.baseUrl}/pessoa/` + id);
     }
 
-    updatePessoa( updatePessoa : Pessoa):Observable<Pessoa>{
+    updatePessoa( updatePessoa : Pessoa):Observable<any>{
     	return this.http.put(`${API_CONFIG.baseUrl}/pessoa/update`,updatePessoa);
     }
 
