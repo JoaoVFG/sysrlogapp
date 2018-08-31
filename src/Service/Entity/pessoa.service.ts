@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { API_CONFIG } from "../../Config/api.config";
-import { Pessoa } from "../../models/pessoa.dto";
 import { Observable } from "rxjs";
+import { Pessoa } from "../../models/pessoa.dto";
 import { InsertPessoaFisicaDTO } from "../../models/inserts/InsertPessoaFisica.dto"
 import { InsertPessoaJuridicaDTO } from "../../models/inserts/InsertPessoaJuridica.dto"
 
