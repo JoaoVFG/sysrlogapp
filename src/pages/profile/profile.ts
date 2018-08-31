@@ -25,7 +25,7 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
-    let loading = this.loadingService.presentLoading();
+    let loading = this.loadingService.presentLoading();ss
     this.pessoaService.findById(this.storage.retrieveIdUser())
       .subscribe( response =>{
         this.pessoa = response;
