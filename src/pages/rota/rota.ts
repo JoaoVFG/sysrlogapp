@@ -95,11 +95,11 @@ export class RotaPage {
         })
 
   }
-  /**
+  
   abrirMaps() {
     window.location.assign(this.rotaResponse.rota);
   }
-
+/**
   initializeMap() {
     this.startPosition = new google.maps.LatLng( -23.533773, -46.625290);
 

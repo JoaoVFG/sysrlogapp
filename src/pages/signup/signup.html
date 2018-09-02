@@ -1,0 +1,90 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Cadastro</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <form [formGroup]="formGroup" (ngSubmit)="signupUser(); $event.preventDefault()">
+        <ion-card>
+            <ion-card-header>Cadastro Pessoa</ion-card-header>
+            <ion-list radio-group formControlName="tipo">
+                <ion-list-header>Tipo de Pessoa</ion-list-header>
+                <ion-item>
+                    <ion-label>Pessoa Fisica</ion-label>
+                    <ion-radio checked=true value="1" (ionSelect)="putTipo('1')"></ion-radio>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Pessoa Jurídica</ion-label>
+                    <ion-radio value="2" (ionSelect)="putTipo('2')"></ion-radio>
+                </ion-item>
+            </ion-list>
+
+            <ion-item *ngIf="tipoPessoa == 1">
+                <ion-label floating>Nome</ion-label>
+                <ion-input formControlName="nome" type="text"> </ion-input>
+            </ion-item>
+            <ion-item *ngIf="tipoPessoa == 2">
+                <ion-label floating>Razão Social</ion-label>
+                <ion-input formControlName="razaoSocial" type="text"> </ion-input>
+            </ion-item>
+            <ion-item *ngIf="tipoPessoa == 1">
+                <ion-label floating>CPF</ion-label>
+                <ion-input formControlName="cpf" type="text"> </ion-input>
+            </ion-item>
+            <ion-item *ngIf="tipoPessoa == 2">
+                <ion-label floating>CNPJ</ion-label>
+                <ion-input formControlName="cnpj" type="text"> </ion-input>
+            </ion-item>
+            <ion-item *ngIf="tipoPessoa == 1">
+                <ion-label floating>Data de Nascimento</ion-label>
+                <ion-input formControlName="dataNascimento" type="text"> </ion-input>
+            </ion-item>
+            <ion-item *ngIf="tipoPessoa == 1">
+                <ion-label floating>Sexo</ion-label>
+                <ion-input formControlName="sexo" type="text"> </ion-input>
+            </ion-item>
+        </ion-card>
+
+        <ion-card>
+            <ion-card-header>Cadastro de Endereço</ion-card-header>
+            <ion-item>
+                <ion-label floating>CEP</ion-label>
+                <ion-input formControlName="cep" type="text"> </ion-input>
+                <button ion-button large clear item-end>
+                    <ion-icon name="search" (click)="verificaCep()"></ion-icon>
+                </button>
+            </ion-item>
+            <ion-item>
+                <h2 *ngIf=cep?.nomeRua>{{cep.nomeRua}}</h2>
+                <h2 *ngIf=cep?.nomeBairro>{{cep.nomeBairro}}</h2>
+                <h2 *ngIf=cep?.nomeCidade>{{cep.nomeCidade}}</h2>
+                <h2 *ngIf=cep?.nomeEstado>{{cep.nomeEstado}}</h2>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Número</ion-label>
+                <ion-input formControlName="numeroLogradouro" type="text"> </ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Complemento</ion-label>
+                <ion-input formControlName="complemento" type="text"> </ion-input>
+            </ion-item>
+        </ion-card>
+
+        <ion-card>
+            <ion-card-header>Cadastro do Usuário</ion-card-header>
+            <ion-item>
+                <ion-label floating>Email</ion-label>
+                <ion-input formControlName="email" type="text"> </ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Senha</ion-label>
+                <ion-input formControlName="senha" type="password"> </ion-input>
+            </ion-item>
+        </ion-card>
+
+        <button ion-button block type="submit">Criar Conta</button>
+
+    </form>
+</ion-content>
