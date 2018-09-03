@@ -29,6 +29,8 @@ export class HomePage {
       .subscribe(response => {
         this.token = response.body.toString();
         this.loginService.sucessfullAuthentication(this.token);
+        
+        
         this.navCtrl.setRoot('ProfilePage');
       },
       error => {

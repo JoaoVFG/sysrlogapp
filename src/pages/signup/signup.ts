@@ -9,6 +9,7 @@ import { InsertLoginDTO } from '../../models/inserts/insertLogin.dto';
 import { PessoaService } from '../../Service/Entity/pessoa.service';
 import { InsertPessoaFisicaDTO } from '../../models/inserts/InsertPessoaFisica.dto';
 import { InsertPessoaJuridicaDTO } from '../../models/inserts/InsertPessoaJuridica.dto';
+import { LoadingService } from '../../Service/Components/loading.service';
 
 /**
  * Generated class for the SignupPage page.
@@ -24,107 +25,110 @@ import { InsertPessoaJuridicaDTO } from '../../models/inserts/InsertPessoaJuridi
 })
 export class SignupPage {
 
-  formGroup : FormGroup;
-  tipoPessoa : any = '1';
-  
-  cep : cep = {
-    cep : '',
-	  nomeRua : '',
-	  nomeBairro : '',
-	  nomeCidade : '',
-	  nomeEstado : ''
-}
+  formGroup: FormGroup;
+  tipoPessoa: any = '1';
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              public menu: MenuController,
-              public formBuilder: FormBuilder,
-              public cepService: CepService,
-              public pessoaService : PessoaService,
-              public alertController : AlertController) {
+  cep: cep = {
+    cep: '',
+    nomeRua: '',
+    nomeBairro: '',
+    nomeCidade: '',
+    nomeEstado: ''
+  }
+
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public menu: MenuController,
+    public formBuilder: FormBuilder,
+    public cepService: CepService,
+    public pessoaService: PessoaService,
+    public alertController: AlertController,
+    public loadingService: LoadingService) {
 
     this.formGroup = this.formBuilder.group({
-      tipo : ["1"],
-      nome : [''],
+      tipo: ["1"],
+      nome: [''],
       razaoSocial: [''],
-      cpf : [''],
-      cnpj : [''],
-      dataNascimento : [''],
-      sexo : [''],
-      cep : [''],
-      numeroLogradouro : ['',],
-      complemento : [''],
-      email : [''],
-      senha:  [''],
+      cpf: [''],
+      cnpj: [''],
+      dataNascimento: [''],
+      sexo: [''],
+      cep: [''],
+      numeroLogradouro: ['',],
+      complemento: [''],
+      email: [''],
+      senha: [''],
 
-      
+
     })
   }
 
-  signupUser(){
+  signupUser() {
     let insertEndereco: InsertEnderecoDTO = {
-      idPessoa : null,
-      cep : this.formGroup.value.cep,
-      numeroLogradouro : this.formGroup.value.numeroLogradouro,
-      complemento : this.formGroup.value.complemento
+      idPessoa: null,
+      cep: this.formGroup.value.cep,
+      numeroLogradouro: this.formGroup.value.numeroLogradouro,
+      complemento: this.formGroup.value.complemento
     };
-    let insertLogin:InsertLoginDTO = {
-      idPessoa : null,
-      email : this.formGroup.value.email,
-      senha : this.formGroup.value.senha,
+    let insertLogin: InsertLoginDTO = {
+      idPessoa: null,
+      email: this.formGroup.value.email,
+      senha: this.formGroup.value.senha,
     };
-    
-    if(this.tipoPessoa == 1){
 
-      let pessoa : InsertPessoaFisicaDTO = {
-        nome : this.formGroup.value.nome,
-        cpf : this.formGroup.value.cpf,
-        dataNascimento : this.formGroup.value.dataNascimento,
-        sexo : this.formGroup.value.sexo,
-        tipo : this.tipoPessoa,
-        insertEnderecoDTO : insertEndereco,
-        insertLoginDTO : insertLogin
-      }    
+    if (this.tipoPessoa == 1) {
+
+      let pessoa: InsertPessoaFisicaDTO = {
+        nome: this.formGroup.value.nome,
+        cpf: this.formGroup.value.cpf,
+        dataNascimento: this.formGroup.value.dataNascimento,
+        sexo: this.formGroup.value.sexo,
+        tipo: this.tipoPessoa,
+        insertEnderecoDTO: insertEndereco,
+        insertLoginDTO: insertLogin
+      }
 
       this.pessoaService.insertPessoaFisica(pessoa)
-        .subscribe(()=>{
+        .subscribe(() => {
           this.showInsertOk();
         })
 
-    }else{
+    } else {
 
-      let pessoa : InsertPessoaJuridicaDTO = {
-        razaoSocial : this.formGroup.value.razaoSocial,
-        cnpj : this.formGroup.value.cnpj,
-        tipo : this.tipoPessoa,
-        insertEnderecoDTO : insertEndereco,
-        insertLoginDTO : insertLogin
+      let pessoa: InsertPessoaJuridicaDTO = {
+        razaoSocial: this.formGroup.value.razaoSocial,
+        cnpj: this.formGroup.value.cnpj,
+        tipo: this.tipoPessoa,
+        insertEnderecoDTO: insertEndereco,
+        insertLoginDTO: insertLogin
       }
-      
+
       this.pessoaService.insertPessoaJuridica(pessoa)
         .subscribe(() => {
           this.showInsertOk();
         })
     }
 
-    
+
   }
 
-  verificaCep(){
+  verificaCep() {
+    let loading = this.loadingService.presentLoading();
     this.cepService.findByCep(this.formGroup.value.cep)
-      .subscribe((response) =>{
+      .subscribe((response) => {
         this.cep = response;
         console.log(this.cep);
-        
+
       },
-      (error) =>{
-        console.log(error);
-        
-      }
-    )
+        (error) => {
+          console.log(error);
+
+        }
+      )
+      loading.dismiss();
   }
-  
-  showInsertOk(){
+
+  showInsertOk() {
     let alert = this.alertController.create({
       title: 'Sucesso!',
       message: 'Cadastro efetuado com sucesso!',
@@ -138,22 +142,22 @@ export class SignupPage {
         }
       ]
     });
-    alert.present(); 
+    alert.present();
   }
 
-  putTipo(tipo:string){
+  putTipo(tipo: string) {
     this.tipoPessoa = tipo;
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.menu.swipeEnable(false);
 
   }
 
-  ionViewWillLeave(){
+  ionViewWillLeave() {
     this.menu.swipeEnable(true);
   }
 
-  
+
 
 }

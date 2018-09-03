@@ -34,7 +34,7 @@ export class cryptService{
 				
 				localStorage.setItem('SECRET',response.body.toString());
 			})**/
-		localStorage.setItem('SECRET','123ASDFAW5E84FA96DFAS5DF1AS3D2F13f1a3d2f13we5f1335!*¨(@¨!&@(*');
+		localStorage.setItem('SECRET','DFa3d2f13we5f1335!*¨(@¨!&@(*');
 	}
 
 	retriveSecret(): string{

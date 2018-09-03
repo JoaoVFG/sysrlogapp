@@ -6,7 +6,7 @@
 
 
 <ion-content padding>
-    <form [formGroup]="formGroup" (ngSubmit)="signupUser(); $event.preventDefault()">
+    <form [formGroup]="formGroup">
         <ion-card>
             <ion-card-header>Cadastro Pessoa</ion-card-header>
             <ion-list radio-group formControlName="tipo">
@@ -57,10 +57,10 @@
                 </button>
             </ion-item>
             <ion-item>
-                <h2 *ngIf=cep?.nomeRua>{{cep.nomeRua}}</h2>
-                <h2 *ngIf=cep?.nomeBairro>{{cep.nomeBairro}}</h2>
-                <h2 *ngIf=cep?.nomeCidade>{{cep.nomeCidade}}</h2>
-                <h2 *ngIf=cep?.nomeEstado>{{cep.nomeEstado}}</h2>
+                <h2 *ngIf=cep?.nomeRua>Nome do logradouro : {{cep.nomeRua}}</h2>
+                <h2 *ngIf=cep?.nomeBairro>Bairro : {{cep.nomeBairro}}</h2>
+                <h2 *ngIf=cep?.nomeCidade>Cidade : {{cep.nomeCidade}}</h2>
+                <h2 *ngIf=cep?.nomeEstado>Estado : {{cep.nomeEstado}}</h2>
             </ion-item>
             <ion-item>
                 <ion-label floating>Número</ion-label>
@@ -84,7 +84,7 @@
             </ion-item>
         </ion-card>
 
-        <button ion-button block type="submit">Criar Conta</button>
+        <button ion-button block (click)="signupUser()">Criar Conta</button>
 
     </form>
 </ion-content>

@@ -14,7 +14,7 @@ export class PessoaService{
     }
 
     findById(id : string) : Observable<Pessoa>{
-        return this.http.get<Pessoa>(`${API_CONFIG.baseUrl}/pessoa/buscapessoa/${id}`);
+        return this.http.get<Pessoa>(`${API_CONFIG.baseUrl}/pessoa/buscapessoa/id/${id}`);
     }
 
     findAll() : Observable<Pessoa[]>{

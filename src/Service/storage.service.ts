@@ -16,23 +16,23 @@ export class storageService {
     saveToken(token : string){
         this.crypt.initializeCryptValue();
 		let tokenData = token.substring(7);
-
-        localStorage.setItem('TOKEN', this.crypt.encrypt(token));
-        localStorage.setItem('ID_USER', this.crypt.encrypt(this.jwtHelper.decodeToken(tokenData).sub));
-        localStorage.setItem('EMAIL_USER', this.crypt.encrypt(this.jwtHelper.decodeToken(tokenData).email));
+        
+        localStorage.setItem('TOKEN', token);    
+        localStorage.setItem('ID_USER', this.jwtHelper.decodeToken(tokenData).idUser);
+        localStorage.setItem('EMAIL_USER', this.jwtHelper.decodeToken(tokenData).email);
         this.destroySecret();
     }
 
     retrieveToken() : string{
-        return this.crypt.decrypt(localStorage.getItem('TOKEN'));
+        return localStorage.getItem('TOKEN');
     }
 
     retriveEmail() : string{
-    	return this.crypt.decrypt(localStorage.getItem('EMAIL_USER'));
+    	return localStorage.getItem('EMAIL_USER');
     }
 
     retrieveIdUser(): string{
-    	return this.crypt.decrypt(localStorage.getItem('ID_USER'));
+    	return localStorage.getItem('ID_USER');
     }
 
     
