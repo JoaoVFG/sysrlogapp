@@ -40,6 +40,19 @@
         </ion-list>
     </ion-card>
 
+    <ion-card *ngIf="rotaResponse?.responsavel">
+        <ion-item>
+            <ion-card-title>Lista de Responsáveis por endereços</ion-card-title>
+        </ion-item>
+        <ion-list>
+            <ion-item *ngFor="let resp of rotaResponse.responsavel">
+                <h2>CEP: {{resp.cep}}</h2>
+                <h2>Responsavel pela Entrega: {{resp.empresa}}</h2>
+                <h3>---</h3>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
     <div #map id="map"></div>
     <div #itens id="itens"></div>
 
