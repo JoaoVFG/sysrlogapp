@@ -51,13 +51,13 @@ export class SignupPage {
       razaoSocial: [''],
       cpf: [''],
       cnpj: [''],
-      dataNascimento: [''],
+      dataNascimento: ['',],
       sexo: [''],
-      cep: [''],
-      numeroLogradouro: ['',],
+      cep: ['', [Validators.required]],
+      numeroLogradouro: ['', [Validators.required]],
       complemento: [''],
-      email: [''],
-      senha: [''],
+      email: ['', [Validators.required,Validators.email]],
+      senha: ['', [Validators.required]],
 
 
     })
@@ -77,39 +77,52 @@ export class SignupPage {
     };
 
     if (this.tipoPessoa == 1) {
+      this.insertPf(insertEndereco, insertLogin);
+    } else {
+      this.insertPj(insertEndereco, insertLogin);
+    }
 
-      let pessoa: InsertPessoaFisicaDTO = {
-        nome: this.formGroup.value.nome,
-        cpf: this.formGroup.value.cpf,
-        dataNascimento: this.formGroup.value.dataNascimento,
-        sexo: this.formGroup.value.sexo,
-        tipo: this.tipoPessoa,
-        insertEnderecoDTO: insertEndereco,
-        insertLoginDTO: insertLogin
-      }
 
+  }
+
+  insertPf(insertEndereco: InsertEnderecoDTO, insertLogin: InsertLoginDTO) {
+
+    let pessoa: InsertPessoaFisicaDTO = {
+      nome: this.formGroup.value.nome,
+      cpf: this.formGroup.value.cpf,
+      dataNascimento: this.formGroup.value.dataNascimento,
+      sexo: this.formGroup.value.sexo,
+      tipo: this.tipoPessoa,
+      insertEnderecoDTO: insertEndereco,
+      insertLoginDTO: insertLogin
+    }
+    if (pessoa.nome == '' || pessoa.cpf == '' || pessoa.dataNascimento == '') {
+      this.showErrorAlert();
+    } else {
       this.pessoaService.insertPessoaFisica(pessoa)
         .subscribe(() => {
           this.showInsertOk();
         })
+    }
+  }
 
+  insertPj(insertEndereco: InsertEnderecoDTO, insertLogin: InsertLoginDTO) {
+    let pessoa: InsertPessoaJuridicaDTO = {
+      razaoSocial: this.formGroup.value.razaoSocial,
+      cnpj: this.formGroup.value.cnpj,
+      tipo: this.tipoPessoa,
+      insertEnderecoDTO: insertEndereco,
+      insertLoginDTO: insertLogin
+    }
+
+    if (pessoa.cnpj == '' || pessoa.razaoSocial == '') {
+      this.showErrorAlert();
     } else {
-
-      let pessoa: InsertPessoaJuridicaDTO = {
-        razaoSocial: this.formGroup.value.razaoSocial,
-        cnpj: this.formGroup.value.cnpj,
-        tipo: this.tipoPessoa,
-        insertEnderecoDTO: insertEndereco,
-        insertLoginDTO: insertLogin
-      }
-
       this.pessoaService.insertPessoaJuridica(pessoa)
         .subscribe(() => {
           this.showInsertOk();
         })
     }
-
-
   }
 
   verificaCep() {
@@ -117,15 +130,12 @@ export class SignupPage {
     this.cepService.findByCep(this.formGroup.value.cep)
       .subscribe((response) => {
         this.cep = response;
-        console.log(this.cep);
-
+        loading.dismiss();
       },
         (error) => {
-          console.log(error);
+          loading.dismiss();
+        })
 
-        }
-      )
-      loading.dismiss();
   }
 
   showInsertOk() {
@@ -139,6 +149,20 @@ export class SignupPage {
           handler: () => {
             this.navCtrl.pop();
           }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  showErrorAlert() {
+    let alert = this.alertController.create({
+      title: 'Erro!',
+      message: 'Existem Campos obrigatórios não preenchidos',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'ok',
         }
       ]
     });

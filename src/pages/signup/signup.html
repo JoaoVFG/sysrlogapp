@@ -19,32 +19,39 @@
                     <ion-label>Pessoa Jurídica</ion-label>
                     <ion-radio value="2" (ionSelect)="putTipo('2')"></ion-radio>
                 </ion-item>
+
             </ion-list>
 
             <ion-item *ngIf="tipoPessoa == 1">
                 <ion-label floating>Nome</ion-label>
                 <ion-input formControlName="nome" type="text"> </ion-input>
             </ion-item>
+            <p class="danger" *ngIf="formGroup.controls['nome'].dirty && formGroup.controls['nome'].errors" margin-left>Valor Inválido!</p>
             <ion-item *ngIf="tipoPessoa == 2">
                 <ion-label floating>Razão Social</ion-label>
                 <ion-input formControlName="razaoSocial" type="text"> </ion-input>
             </ion-item>
+            <p class="danger" *ngIf="formGroup.controls['razaoSocial'].dirty && formGroup.controls['razaoSocial'].errors" margin-left>Valor Inválido!</p>
             <ion-item *ngIf="tipoPessoa == 1">
                 <ion-label floating>CPF</ion-label>
                 <ion-input formControlName="cpf" type="text"> </ion-input>
             </ion-item>
+            <p class="danger" *ngIf="formGroup.controls['cpf'].dirty && formGroup.controls['cpf'].errors" margin-left>Valor Inválido!</p>
             <ion-item *ngIf="tipoPessoa == 2">
                 <ion-label floating>CNPJ</ion-label>
                 <ion-input formControlName="cnpj" type="text"> </ion-input>
             </ion-item>
+            <p class="danger" *ngIf="formGroup.controls['cnpj'].dirty && formGroup.controls['cnpj'].errors" margin-left>Valor Inválido!</p>
             <ion-item *ngIf="tipoPessoa == 1">
                 <ion-label floating>Data de Nascimento</ion-label>
                 <ion-input formControlName="dataNascimento" type="text"> </ion-input>
             </ion-item>
+            <p class="danger" *ngIf="formGroup.controls['dataNascimento'].dirty && formGroup.controls['dataNascimento'].errors" margin-left>Valor Inválido!</p>
             <ion-item *ngIf="tipoPessoa == 1">
                 <ion-label floating>Sexo</ion-label>
                 <ion-input formControlName="sexo" type="text"> </ion-input>
             </ion-item>
+
         </ion-card>
 
         <ion-card>
@@ -56,6 +63,7 @@
                     <ion-icon name="search" (click)="verificaCep()"></ion-icon>
                 </button>
             </ion-item>
+            <p class="danger" *ngIf="formGroup.controls['nome'].dirty && formGroup.controls['nome'].errors" margin-left>Valor Inválido!</p>
             <ion-item>
                 <h2 *ngIf=cep?.nomeRua>Nome do logradouro : {{cep.nomeRua}}</h2>
                 <h2 *ngIf=cep?.nomeBairro>Bairro : {{cep.nomeBairro}}</h2>
@@ -66,6 +74,7 @@
                 <ion-label floating>Número</ion-label>
                 <ion-input formControlName="numeroLogradouro" type="text"> </ion-input>
             </ion-item>
+            <p class="danger" *ngIf="formGroup.controls['nome'].dirty && formGroup.controls['nome'].errors" margin-left>Valor Inválido!</p>
             <ion-item>
                 <ion-label floating>Complemento</ion-label>
                 <ion-input formControlName="complemento" type="text"> </ion-input>
@@ -78,6 +87,7 @@
                 <ion-label floating>Email</ion-label>
                 <ion-input formControlName="email" type="text"> </ion-input>
             </ion-item>
+            <p class="danger" *ngIf="formGroup.controls['email'].dirty && formGroup.controls['email'].errors" margin-left>Valor Inválido!</p>
             <ion-item>
                 <ion-label floating>Senha</ion-label>
                 <ion-input formControlName="senha" type="password"> </ion-input>
