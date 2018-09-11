@@ -63,7 +63,7 @@
                     <ion-icon name="search" (click)="verificaCep()"></ion-icon>
                 </button>
             </ion-item>
-            <p class="danger" *ngIf="formGroup.controls['nome'].dirty && formGroup.controls['nome'].errors" margin-left>Valor Inválido!</p>
+            <p class="danger" *ngIf="formGroup.controls['cep'].dirty && formGroup.controls['cep'].errors" margin-left>Valor Inválido!</p>
             <ion-item>
                 <h2 *ngIf=cep?.nomeRua>Nome do logradouro : {{cep.nomeRua}}</h2>
                 <h2 *ngIf=cep?.nomeBairro>Bairro : {{cep.nomeBairro}}</h2>
@@ -74,7 +74,7 @@
                 <ion-label floating>Número</ion-label>
                 <ion-input formControlName="numeroLogradouro" type="text"> </ion-input>
             </ion-item>
-            <p class="danger" *ngIf="formGroup.controls['nome'].dirty && formGroup.controls['nome'].errors" margin-left>Valor Inválido!</p>
+            <p class="danger" *ngIf="formGroup.controls['numeroLogradouro'].dirty && formGroup.controls['numeroLogradouro'].errors" margin-left>Valor Inválido!</p>
             <ion-item>
                 <ion-label floating>Complemento</ion-label>
                 <ion-input formControlName="complemento" type="text"> </ion-input>
