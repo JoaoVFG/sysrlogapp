@@ -19,6 +19,7 @@ import { RotaService } from '../Service/rota.service';
 import { CepService } from '../Service/Entity/cep.service';
 import { UserService } from '../Service/Entity/user.service';
 import { EnderecoService } from '../Service/Entity/endereco.service';
+import { MenuProvider } from '../providers/menu/menu';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { EnderecoService } from '../Service/Entity/endereco.service';
     PessoaService,
     EnderecoService,
     UserService,
+    MenuProvider,
     
   ]
 })
