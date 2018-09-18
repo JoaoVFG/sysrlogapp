@@ -36,7 +36,6 @@ export class ProfilePage {
         
         this.enderecoService.findByPessoa(this.pessoa.id)
           .subscribe(responseEnd =>{
-            console.log(responseEnd);
             this.endereco = responseEnd;
           }, error =>{
             console.log(error);

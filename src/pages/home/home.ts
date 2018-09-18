@@ -13,9 +13,9 @@ import { cryptService } from '../../Service/crypt.service';
 export class HomePage {
   
   logindto : loginDTO = {
-    email:"",
-    senha:""
-  }
+    email : '',
+    senha:'',
+   }
   
   token : string;
   constructor(public navCtrl: NavController,
@@ -25,6 +25,8 @@ export class HomePage {
   }
 
   login(){
+    console.log('teste');
+    console.log(this.logindto.email);
     this.loginService.authenticate(this.logindto)
       .subscribe(response => {
         this.token = response.body.toString();

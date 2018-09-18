@@ -48,10 +48,10 @@ export class RotaPage {
     cep: '',
     empresa: ''
   }
-  
+
 
   URL: string;
-
+  rotaGerada : number = 0;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -72,6 +72,7 @@ export class RotaPage {
       }, error => {
         console.log(error);
       })
+
   }
 
   addToList() {
@@ -79,6 +80,22 @@ export class RotaPage {
       cep: this.enderecoEntrega.cep,
       numeroLogradouro: this.enderecoEntrega.numeroLogradouro
     });
+    this.enderecoEntrega.cep = '';
+    this.enderecoEntrega.numeroLogradouro = '';
+  }
+
+  removeOfList(cepBusca: string, numLogradouro: string) {
+    let waypoints: enderecoEntregaDTO = {
+      cep: cepBusca,
+      numeroLogradouro: numLogradouro
+    }
+
+
+    let index: number = this.listaEndereco.waypoints.findIndex
+      (e => e.cep === cepBusca && e.numeroLogradouro === numLogradouro);
+    this.listaEndereco.waypoints.splice(index, 1);
+
+
   }
 
   gerarRota() {
@@ -95,61 +112,61 @@ export class RotaPage {
         })
 
   }
-  
+
   abrirMaps() {
     window.location.assign(this.rotaResponse.rota);
   }
-/**
-  initializeMap() {
-    this.startPosition = new google.maps.LatLng( -23.533773, -46.625290);
-
-    const mapOptions = {
-      zoom: 18,
-      center: this.startPosition,
-      disableDefaultUI: false
-    }
-
-    this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    this.calculateRoute();
-    this.directionsDisplay.setMap(this.map);
-
-  }
-
-  calculateRoute() {
-    const request = {
-      // Pode ser uma coordenada (LatLng), uma string ou um lugar
-      origin: this.rotaResponse.enderecoOrigem,
-      destination: this.rotaResponse.enderecoOrigem,
-      waypoints: this.generateWayPoints(),
-      travelMode: 'DRIVING'
-    };
-
-    this.traceRoute(this.directionsService, this.directionsDisplay, request);
-  }
-
-  traceRoute(service: any, display: any, request: any) {
-    service.route(request, function (result, status) {
-      if (status == 'OK') {
-        display.setDirections(result);
+  /**
+    initializeMap() {
+      this.startPosition = new google.maps.LatLng( -23.533773, -46.625290);
+  
+      const mapOptions = {
+        zoom: 18,
+        center: this.startPosition,
+        disableDefaultUI: false
       }
-    });
-  }
-
-  generateWayPoints() {
-    
-    for (let i of this.rotaResponse.waypoints) {
-      this.waypointsGoogle.push({
-        location: i,
-        stopover: true
-      })
-
-      console.log(this.waypointsGoogle.toString);
-      
-      
+  
+      this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      this.calculateRoute();
+      this.directionsDisplay.setMap(this.map);
+  
     }
-    return this.waypointsGoogle;
-  }
-  **/
+  
+    calculateRoute() {
+      const request = {
+        // Pode ser uma coordenada (LatLng), uma string ou um lugar
+        origin: this.rotaResponse.enderecoOrigem,
+        destination: this.rotaResponse.enderecoOrigem,
+        waypoints: this.generateWayPoints(),
+        travelMode: 'DRIVING'
+      };
+  
+      this.traceRoute(this.directionsService, this.directionsDisplay, request);
+    }
+  
+    traceRoute(service: any, display: any, request: any) {
+      service.route(request, function (result, status) {
+        if (status == 'OK') {
+          display.setDirections(result);
+        }
+      });
+    }
+  
+    generateWayPoints() {
+      
+      for (let i of this.rotaResponse.waypoints) {
+        this.waypointsGoogle.push({
+          location: i,
+          stopover: true
+        })
+  
+        console.log(this.waypointsGoogle.toString);
+        
+        
+      }
+      return this.waypointsGoogle;
+    }
+    **/
 }
 
 

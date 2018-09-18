@@ -10,17 +10,17 @@
 
 
 <ion-content padding>
-    <ion-item>
+    <ion-item *ngIf="!rotaResponse?.rota">
         <ion-label floating>CEP</ion-label>
         <ion-input [(ngModel)]="enderecoEntrega.cep" name="enderecoCep" type="text"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="!rotaResponse?.rota">
         <ion-label floating>NUM</ion-label>
         <ion-input [(ngModel)]="enderecoEntrega.numeroLogradouro" name="enderecoNum" type="text"></ion-input>
     </ion-item>
 
-    <button name="btnEntrar" ion-button round medium (click)="validaCep()">Adicionar</button>
-    <button name="btnGerar" ion-button round medium (click)="gerarRota()">Gerar Rota</button>
+    <button *ngIf="!rotaResponse?.rota" name="btnAdicionar" ion-button round medium (click)="validaCep()">Adicionar</button>
+    <button *ngIf="!rotaResponse?.rota" name="btnGerar" ion-button round medium (click)="gerarRota()">Gerar Rota</button>
 
     <ion-card *ngIf="rotaResponse?.rota">
         <ion-item>
@@ -29,18 +29,32 @@
         <button name="btnMaps" ion-button round medium (click)="abrirMaps()">Rota</button>
     </ion-card>
 
-    <ion-card>
+    <ion-card *ngIf="!rotaResponse?.rota">
         <ion-item>
-            <ion-card-title>Lista de endereços</ion-card-title>
+            <ion-card-title>Endereços à serem roteirazados</ion-card-title>
         </ion-item>
         <ion-list>
             <ion-item *ngFor="let end of listaEndereco.waypoints">
-                <h2>CEP: {{end.cep}} Numero: {{end.numeroLogradouro}}</h2>
+                CEP: {{end.cep}} Numero: {{end.numeroLogradouro}}
+                <ion-icon name="remove-circle" (click)="removeOfList(end.cep, end.numeroLogradouro)"></ion-icon>
             </ion-item>
         </ion-list>
     </ion-card>
 
-    <ion-card *ngIf="rotaResponse?.responsavel">
+    <ion-card *ngIf="rotaResponse?.rota">
+        <ion-item>
+            <ion-card-title>Endereços da Rota</ion-card-title>
+        </ion-item>
+        <ion-list>
+            <ion-item *ngFor="let e of rotaResponse.waypoints">
+                <h2>
+                    {{e}}
+                </h2>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-card *ngIf="rotaResponse?.rota">
         <ion-item>
             <ion-card-title>Lista de Responsáveis por endereços</ion-card-title>
         </ion-item>
@@ -48,7 +62,6 @@
             <ion-item *ngFor="let resp of rotaResponse.responsavel">
                 <h2>CEP: {{resp.cep}}</h2>
                 <h2>Responsavel pela Entrega: {{resp.empresa}}</h2>
-                <h3>---</h3>
             </ion-item>
         </ion-list>
     </ion-card>
