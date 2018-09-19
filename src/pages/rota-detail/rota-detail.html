@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Detalhes da Rota</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card>
+    <ion-card-title>
+      Informações
+    </ion-card-title>
+    <ion-item>
+      
+        <h2> Identificação da Rota : {{rotaBuscaResponseDTO?.idRota}} </h2>
+        <h2> Usuário Criador : {{rotaBuscaResponseDTO?.usuarioCriador}} </h2> 
+        <h3> Data de Criação : {{rotaBuscaResponseDTO?.dataCriacao}} </h3> 
+        <h3 *ngIf="rotaBuscaResponseDTO?.empresa"> Empresa : {{rotaBuscaResponseDTO?.empresa}}</h3>
+      
+    </ion-item>
+
+  </ion-card>
+
+  <ion-card *ngIf="rotaBuscaResponseDTO?.urlRota">
+    <ion-item>
+      <ion-card-title (click)="abrirMaps()">Abrir no Google Maps
+        <ion-icon name="arrow-dropright-circle"></ion-icon>
+      </ion-card-title>
+    </ion-item>
+  </ion-card>
+
+  <ion-card *ngIf="rotaBuscaResponseDTO?.listaEnderecoEntrega">
+      <ion-item>
+          <ion-card-title>Endereços da Rota</ion-card-title>
+      </ion-item>
+      <ion-list>
+          <ion-item *ngFor="let enderecoEntrega of rotaBuscaResponseDTO.listaEnderecoEntrega">
+              <h2>
+                  {{enderecoEntrega}}
+              </h2>
+          </ion-item>
+      </ion-list>
+  </ion-card>
+
+  <ion-card *ngIf="rotaBuscaResponseDTO?.responsavelEntregaCepRotas">
+      <ion-item>
+          <ion-card-title>Empresa Responsável pela Entrega</ion-card-title>
+      </ion-item>
+      <ion-list>
+          <ion-item *ngFor="let responsavelEntrega of rotaBuscaResponseDTO.responsavelEntregaCepRotas">
+              <h2>
+                  {{responsavelEntrega}}
+              </h2>
+          </ion-item>
+      </ion-list>
+  </ion-card>
+
+
+</ion-content>

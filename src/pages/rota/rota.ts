@@ -51,7 +51,6 @@ export class RotaPage {
 
 
   URL: string;
-  rotaGerada : number = 0;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,

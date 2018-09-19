@@ -25,8 +25,7 @@ export class HomePage {
   }
 
   login(){
-    console.log('teste');
-    console.log(this.logindto.email);
+
     this.loginService.authenticate(this.logindto)
       .subscribe(response => {
         this.token = response.body.toString();

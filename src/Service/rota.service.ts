@@ -5,6 +5,7 @@ import { API_CONFIG } from "../Config/api.config";
 import { rotaResponse } from "../models/rota/rotaresponse.dto";
 import { Observable } from "rxjs";
 import { storageService } from "./storage.service";
+import { RotaBuscaResponseDTO } from "../models/rota/RotaBuscaResponseDTO";
 
 @Injectable()
 export class RotaService{
@@ -25,14 +26,14 @@ export class RotaService{
         )
     }
 
-    findById(idRota : number) : Observable<rotaResponse>{
-        return this.http.get<rotaResponse>(
+    findById(idRota : number) : Observable<RotaBuscaResponseDTO>{
+        return this.http.get<RotaBuscaResponseDTO>(
             `${API_CONFIG.baseUrl}/rota/busca/id/` + idRota
         )
     }
 
-    findByUser() : Observable<rotaResponse[]>{
-        return this.http.get<rotaResponse[]>(
+    findByUser() : Observable<RotaBuscaResponseDTO[]>{
+        return this.http.get<RotaBuscaResponseDTO[]>(
             `${API_CONFIG.baseUrl}/rota/busca/` + this.storage.retrieveIdUser()
         )
     }

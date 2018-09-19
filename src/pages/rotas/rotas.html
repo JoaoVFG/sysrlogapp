@@ -1,12 +1,23 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>rotas</ion-title>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>
+        <ion-title>Rotas Criadas</ion-title>
     </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-
+    <ion-list>
+        <ion-list-header>
+            <h1>Rotas Geradas</h1>
+        </ion-list-header>
+        <a> <ion-item *ngFor="let rota of rotas" (click)="openDetailRota(rota)">    
+            <h2>Id da Rota: {{rota.idRota}}</h2>
+            <h2>Data de Criação da Rota: {{rota.dataCriacao}}</h2>
+            <h3>Usuário Criador : {{rota.usuarioCriador}}</h3>
+        </ion-item> </a>    
+    </ion-list>
 </ion-content>
