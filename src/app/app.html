@@ -30,12 +30,15 @@
             </ion-item>
 
         </ion-list>
-        <ion-item (click)="logout()">Logout
-            <ion-icon name="log-out" align-self="end"></ion-icon>
-        </ion-item>
-
     </ion-content>
-
+    <ion-footer>
+        <ion-toolbar end>
+            <ion-item (click)="logout()" >
+                <ion-icon name="log-out"></ion-icon>
+                Logout
+            </ion-item>
+        </ion-toolbar>
+      </ion-footer>
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
