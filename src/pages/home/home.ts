@@ -4,6 +4,7 @@ import { loginDTO } from '../../models/login.dto';
 import { loginService } from '../../Service/login.service';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
 import { cryptService } from '../../Service/crypt.service';
+import { MyApp } from '../../app/app.component';
 
 @IonicPage()
 @Component({
@@ -20,7 +21,8 @@ export class HomePage {
   token : string;
   constructor(public navCtrl: NavController,
               public loginService: loginService,
-              public menu: MenuController) {
+              public menu: MenuController,
+              public app: MyApp) {
               
   }
 
@@ -47,6 +49,7 @@ export class HomePage {
   }
 
   ionViewWillLeave(){
+    this.app.getSideMenuData();
     this.menu.swipeEnable(true);
   }
 

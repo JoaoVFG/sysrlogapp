@@ -41,7 +41,7 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.getSideMenuData();
+      //this.getSideMenuData();
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -77,6 +77,8 @@ export class MyApp {
   }
    */
   getSideMenuData() {
+    console.log('CARREGANDO MENU');
+    
     this.pages = this.menuProvider.getSideMenus();
   }
 
