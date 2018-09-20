@@ -4,14 +4,14 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Profile</ion-title>
+    <ion-title>PESSOA</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 
 <ion-content padding>
-  <ion-card>
+  <ion-card *ngIf="modo=='Consulta'">
     <ion-card-header>
       PESSOA
     </ion-card-header>
@@ -21,11 +21,54 @@
       <h2 *ngIf=pessoa?.razaoSocial>Razão Social: {{pessoa?.razaoSocial}}</h2>
       <h3 *ngIf=pessoa?.cpf>CPF: {{pessoa?.cpf}}</h3>
       <h3 *ngIf=pessoa?.cnpj>CNPJ: {{pessoa?.cnpj}}</h3>
-      <p *ngIf=email>EMAIL: {{email}}</p>
       <p *ngIf=pessoa?.dataNascimento>Data de Nascimento: {{pessoa?.dataNascimento}}</p>
       <p *ngIf=pessoa?.sexo>Sexo: {{pessoa?.sexo}}</p>
       <p *ngIf=pessoa?.tipo?.descricao>Tipo de Pessoa: {{pessoa?.tipo?.descricao}}</p>
     </ion-card-content>
   </ion-card>
-  <button name="btnAltera" ion-button round medium (click)="altera()">Alterar Pessoa</button>
+  <button *ngIf="modo=='Consulta'" name="btnAtivaAltera" ion-button round medium (click)="alteraModo('Altera')">Alterar Pessoa</button>
+
+  <form [formGroup]="formGroup">
+    <ion-card *ngIf="modo=='Altera'">
+
+      <ion-card-header>
+        ALTERAR CADASTRO
+      </ion-card-header>
+      <h2>  ID: {{pessoa.id}}</h2>
+      <ion-item *ngIf=pessoa?.nome>
+        <ion-label floating>Nome</ion-label>
+        <ion-input formControlName="nome" type="text" [(ngModel)]="pessoa.nome"></ion-input>
+      </ion-item>
+
+
+      <ion-item *ngIf=pessoa?.razaoSocial>
+        <ion-label floating>Razão Social</ion-label>
+        <ion-input formControlName="razaoSocial" type="text" [(ngModel)]="pessoa.razaoSocial">{{pessoa?.razaoSocial}}</ion-input>
+      </ion-item>
+
+      <ion-item *ngIf=pessoa?.cpf>
+        <ion-label floating>CPF</ion-label>
+        <ion-input formControlName="cpf" type="text" [(ngModel)]="pessoa.cpf"> </ion-input>
+      </ion-item>
+      
+      <ion-item *ngIf=pessoa?.cnpj>
+        <ion-label floating>CNPJ</ion-label>
+        <ion-input formControlName="cnpj" type="text" [(ngModel)]="pessoa.cnpj"> </ion-input>
+      </ion-item>
+
+      <ion-item *ngIf=pessoa?.dataNascimento>
+        <ion-label floating>Data de Nascimento</ion-label>
+        <ion-input formControlName="dataNascimento" type="text" [(ngModel)]="pessoa.dataNascimento"> </ion-input>
+      </ion-item>
+
+      <ion-item *ngIf=pessoa?.sexo>
+        <ion-label floating>Sexo</ion-label>
+        <ion-input formControlName="sexo" type="text" [(ngModel)]="pessoa.sexo"> </ion-input>
+      </ion-item>
+
+
+    </ion-card>
+    <button *ngIf="modo=='Altera'" name="btnAltera" ion-button round medium (click)="alteraPessoa()">Enviar Pessoa</button>
+    <ion-item *ngIf="modo=='Altera'" (click)="alteraModo('Consulta')">Voltar</ion-item>
+  </form>
 </ion-content>
