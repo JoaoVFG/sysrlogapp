@@ -8,12 +8,7 @@ import { UserService } from '../../Service/Entity/user.service';
 import { storageService } from '../../Service/storage.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-/**
- * Generated class for the PessoaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({

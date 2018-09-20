@@ -21,6 +21,7 @@ import { UserService } from '../Service/Entity/user.service';
 import { EnderecoService } from '../Service/Entity/endereco.service';
 import { MenuProvider } from '../providers/menu/menu';
 
+
 @NgModule({
   declarations: [
     MyApp
@@ -51,7 +52,7 @@ import { MenuProvider } from '../providers/menu/menu';
     PessoaService,
     EnderecoService,
     UserService,
-    MenuProvider,
+    MenuProvider
     
   ]
 })

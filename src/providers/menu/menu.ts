@@ -32,6 +32,13 @@ export class MenuProvider {
       },
       {
         title: 'Pessoa', component: 'PessoaPage'
+      },
+      {
+        title : 'Endereco',
+        subPages: [{
+          title: 'Meu Endereco',
+          component: 'EnderecoPage',
+        }] 
       }
 
     ];

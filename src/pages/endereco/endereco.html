@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>ENDEREÇO</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Endereço
+    </ion-card-header>
+    <ion-card-content>
+      <h2>Cep: {{endereco?.cep.cep}}</h2>
+      <h2>Logradouro : {{endereco?.cep.nomeRua}}</h2>
+      <h2>Número: {{endereco?.numeroLogradouro}}</h2>
+      <h2 *ngIf=endereco?.complemento>Complemento: {{endereco?.complemento}}</h2>
+      <h2>Bairro: {{endereco?.cep.bairro}}</h2>
+      <h2>Cidade: {{endereco?.cep.cidade.nome}}</h2>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
