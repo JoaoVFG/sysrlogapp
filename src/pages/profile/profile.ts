@@ -6,6 +6,8 @@ import { Pessoa } from '../../models/pessoa.dto';
 import { LoadingService } from '../../Service/Components/loading.service';
 import { EnderecoService } from '../../Service/Entity/endereco.service';
 import { Endereco } from '../../models/endereco.dto';
+import { UserService } from '../../Service/Entity/user.service';
+import { User } from '../../models/user.dto';
 
 
 @IonicPage()
@@ -15,36 +17,46 @@ import { Endereco } from '../../models/endereco.dto';
 })
 export class ProfilePage {
 
-  pessoa : Pessoa;
-  email : string;
-  endereco : Endereco;
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              public pessoaService : PessoaService,
-              public enderecoService : EnderecoService,
-              public storage : storageService,
-              public loadingService: LoadingService) {
-    
-                this.email = this.storage.retriveEmail();
+  pessoa: Pessoa;
+  user: User = {
+    id: '',
+    email: '',
+    roles: [],
+    senha: '',
+    pessoa: undefined,
+  }
+  email: string;
+  endereco: Endereco;
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public pessoaService: PessoaService,
+    public enderecoService: EnderecoService,
+    public userService: UserService,
+    public storage: storageService,
+    public loadingService: LoadingService) {
+
+    this.email = this.storage.retriveEmail();
   }
 
   ionViewDidLoad() {
     let loading = this.loadingService.presentLoading();
-    this.pessoaService.findById(this.storage.retrieveIdUser())
-      .subscribe( response =>{
-        this.pessoa = response;
-        
+
+    this.userService.findById(this.storage.retrieveIdUser())
+      .subscribe(responseUser => {
+        this.pessoa = responseUser.pessoa;
         this.enderecoService.findByPessoa(this.pessoa.id)
-          .subscribe(responseEnd =>{
+          .subscribe(responseEnd => {
             this.endereco = responseEnd;
-          }, error =>{
-            console.log(error);
-          })
+          },
+            error => {
+              console.log(error);
+
+            })
       },
-    error => {
-      console.log(error);
-    })
-    
+        error => {
+          console.log(error);
+
+        })
 
     loading.dismiss();
   }
