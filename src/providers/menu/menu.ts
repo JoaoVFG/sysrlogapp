@@ -24,11 +24,15 @@ export class MenuProvider {
         subPages: [{
           title: 'Gerar nova Rota',
           component: 'RotaPage',
-        }, {
+        }, 
+        {
           title: 'Rotas Geradas',
           component: 'RotasPage',
         }]
       },
+      {
+        title: 'Pessoa', component: 'PessoaPage'
+      }
 
     ];
   }
