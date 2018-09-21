@@ -44,8 +44,8 @@ export class EnderecoService{
         return this.http.delete(`${API_CONFIG.baseUrl}/endereco/` + idEndereco);
     }
 
-    updateEndereco( idEndereco : string, enderecoUpdate : InsertEnderecoDTO){
-        return this.http.put(`${API_CONFIG.baseUrl}/endereco${idEndereco}`,enderecoUpdate);
+    updateEndereco( idEndereco : number, enderecoUpdate : InsertEnderecoDTO){
+        return this.http.put(`${API_CONFIG.baseUrl}/endereco/update/${idEndereco}`,enderecoUpdate);
     }
 
 }

@@ -80,13 +80,11 @@ export class PessoaPage {
     console.log(updatePessoa)
     this.pessoaService.updatePessoa(updatePessoa)
       .subscribe((response) =>{
-        console.log(response);
-        
+        this.showUpdateOk();
       },error =>{
-        console.log(error);
-        
+
       });
-    this.showUpdateOk();
+   
 
 
 

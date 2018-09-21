@@ -5,6 +5,7 @@ export interface Endereco{
 
 	id : number;
 	pessoa : Pessoa;
+	idPessoa : string;
 	cep: CepCompleto;
 	numeroLogradouro : number;
 	complemento : string;

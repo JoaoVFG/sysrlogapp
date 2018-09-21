@@ -1,5 +1,5 @@
 export class InsertEnderecoDTO{
-	idPessoa : number;
+	idPessoa : string;
 	cep : string;
 	numeroLogradouro : number;
 	complemento : string;

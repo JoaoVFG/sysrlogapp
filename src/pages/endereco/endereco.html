@@ -10,7 +10,7 @@
 
 
 <ion-content padding>
-  <ion-card>
+  <ion-card *ngIf="modo=='Consulta'">
     <ion-card-header>
       Endereço
     </ion-card-header>
@@ -23,4 +23,36 @@
       <h2>Cidade: {{endereco?.cep.cidade.nome}}</h2>
     </ion-card-content>
   </ion-card>
+  <button *ngIf="modo=='Consulta'" name="btnAtivaAltera" ion-button round medium (click)="alteraModo('Altera')">Alterar Endereço</button>
+  
+  
+  <form [formGroup]="formGroup">
+    <ion-card *ngIf="modo=='Altera'">
+      <ion-card-header>Cadastro de Endereço</ion-card-header>
+      <h2>{{endereco?.id}}</h2>
+      <ion-item>
+        <ion-label floating>CEP</ion-label>
+        <ion-input formControlName="cep" type="text"  [(ngModel)]="endereco.cep.cep"> </ion-input>
+        <button ion-button large clear item-end>
+          <ion-icon name="search" (click)="verificaCep()" ></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item>
+        <h2 *ngIf=cep?.nomeRua>Nome do logradouro : {{cep.nomeRua}}</h2>
+        <h2 *ngIf=cep?.nomeBairro>Bairro : {{cep.nomeBairro}}</h2>
+        <h2 *ngIf=cep?.nomeCidade>Cidade : {{cep.nomeCidade}}</h2>
+        <h2 *ngIf=cep?.nomeEstado>Estado : {{cep.nomeEstado}}</h2>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Número</ion-label>
+        <ion-input formControlName="numeroLogradouro" type="text" [(ngModel)]="endereco.numeroLogradouro"> </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Complemento</ion-label>
+        <ion-input formControlName="complemento" type="text" [(ngModel)]="endereco.complemento"> </ion-input>
+      </ion-item>
+    </ion-card>
+    <button *ngIf="modo=='Altera'" name="btnAltera" ion-button round medium (click)="alteraEndereco()">Enviar Pessoa</button>
+    <ion-item *ngIf="modo=='Altera'" (click)="alteraModo('Consulta')">Voltar</ion-item>
+  </form>
 </ion-content>
