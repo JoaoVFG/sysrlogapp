@@ -39,8 +39,14 @@ export class MenuProvider {
           title: 'Meu Endereco',
           component: 'EnderecoPage',
         }] 
+      },
+      {
+        title : 'Funcionario',
+        subPages: [{
+          title: 'Funcionario - Informacões',
+          component: 'FuncionarioPage',
+        }] 
       }
-
     ];
   }
 

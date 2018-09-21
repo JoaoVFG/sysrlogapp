@@ -20,6 +20,9 @@ import { CepService } from '../Service/Entity/cep.service';
 import { UserService } from '../Service/Entity/user.service';
 import { EnderecoService } from '../Service/Entity/endereco.service';
 import { MenuProvider } from '../providers/menu/menu';
+import { FuncionarioService } from '../Service/Entity/funcionario.service';
+import { CargoService } from '../Service/Entity/cargo.service';
+import { EmpresaService } from '../Service/Entity/empresa.service';
 
 
 @NgModule({
@@ -52,7 +55,10 @@ import { MenuProvider } from '../providers/menu/menu';
     PessoaService,
     EnderecoService,
     UserService,
-    MenuProvider
+    MenuProvider,
+    FuncionarioService,
+    CargoService,
+    EmpresaService
     
   ]
 })
