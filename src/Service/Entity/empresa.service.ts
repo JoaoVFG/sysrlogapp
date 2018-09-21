@@ -12,27 +12,27 @@ export class EmpresaService{
 
     }
 
-    findById(idEmpresa : string){
+    findById(idEmpresa : string) : Observable<Empresa>{
         return this.http.get<Empresa>(`${API_CONFIG.baseUrl}/empresa/buscaempresa/${idEmpresa}`);
     }
 
-    findAll(){
-        this.http.get<Empresa[]>(`${API_CONFIG.baseUrl}/empresa/buscaempresa`);
+    findAll() : Observable<Empresa[]>{
+        return this.http.get<Empresa[]>(`${API_CONFIG.baseUrl}/empresa/buscaempresa`);
     }
 
-    findByIdPessoa(idPessoa : string){
+    findByIdPessoa(idPessoa : string)  : Observable<Empresa>{
         return this.http.get<Empresa>(`${API_CONFIG.baseUrl}/empresa/buscaempresa/idpessoa/${idPessoa}`);
     }
 
-    findByTipoEmpresa(idTipo : string){
+    findByTipoEmpresa(idTipo : string) : Observable<Empresa[]> {
         return this.http.get<Empresa[]>(`${API_CONFIG.baseUrl}/empresa/buscaempresa/tipoempresa/${idTipo}`);
     }
 
-    findTransportadoras(){
+    findTransportadoras() : Observable<Empresa[]>{
         return this.http.get<Empresa[]>(`${API_CONFIG.baseUrl}/empresa/buscaempresa/transportadoras`);
     }
 
-    findByMatriz(idMatriz : string){
+    findByMatriz(idMatriz : string) : Observable<Empresa[]>{
         return  this.http.get<Empresa[]>(`${API_CONFIG.baseUrl}/empresa/buscaempresa/idmatriz/${idMatriz}`)
     }
 
