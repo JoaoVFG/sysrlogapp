@@ -89,8 +89,9 @@ export class EmpresaPage {
     this.filiais = undefined;
   }
 
-  detalhar(){
-    console.log('detalhar');
+  openEmpresaDetail(empresaDetail : Empresa){
+    console.log(empresaDetail);
+    this.navCtrl.push('EmpresaDetailPage', {'empresa': empresaDetail})
     
   }
 }

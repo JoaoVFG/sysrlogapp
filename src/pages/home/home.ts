@@ -49,7 +49,7 @@ export class HomePage {
   }
 
   ionViewWillLeave(){
-    this.app.getSideMenuData();
+    //this.app.getSideMenuData();
     this.menu.swipeEnable(true);
   }
 

@@ -41,7 +41,7 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      //this.getSideMenuData();
+      this.getSideMenuData();
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
