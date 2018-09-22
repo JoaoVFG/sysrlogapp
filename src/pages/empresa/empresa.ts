@@ -24,47 +24,73 @@ import { Pessoa } from '../../models/pessoa.dto';
 })
 export class EmpresaPage {
 
-  empresa : Empresa;
-  endereco : Endereco;
-  pessoa : Pessoa;
-  
+  empresa: Empresa;
+  endereco: Endereco;
+  pessoa: Pessoa;
+  filiais: Empresa[];
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public empresaService: EmpresaService,
     public userService: UserService,
     public funcionarioService: FuncionarioService,
     public storage: storageService,
-    public enderecoService : EnderecoService) {
+    public enderecoService: EnderecoService) {
   }
 
   ionViewDidLoad() {
     this.userService.findById(this.storage.retrieveIdUser())
-      .subscribe(response =>{
-        console.log(response)
-        if(response.pessoa.tipo.id == '1'){
+      .subscribe(response => {
+
+        if (response.pessoa.tipo.id == '1') {
           this.funcionarioService.findByPessoa(response.pessoa.id)
             .subscribe(responseFuncionario => {
               this.empresa = responseFuncionario.empresa;
- 
-              
-            })         
-          
-        }else{
+
+
+            })
+
+        } else {
           this.empresaService.findByIdPessoa(response.pessoa.id)
             .subscribe(responseEmpresas => {
               this.empresa = responseEmpresas;
 
-          })
+            })
         }
 
         this.enderecoService.findByPessoa(this.storage.retrieveIdUser())
-            .subscribe(responseEndereco => {
-              this.endereco = responseEndereco;
-              console.log(this.endereco)
-            })
+          .subscribe(responseEndereco => {
+            this.endereco = responseEndereco;
+          })
 
       })
   }
 
+  exibeFiliais() {
+   
+    
+    let idMatriz: string;
+    if (this.empresa.empresaMatriz) {
+      idMatriz = this.empresa.empresaMatriz;
+    } else {
+      idMatriz = this.empresa.pessoa.id
+    }
+
+    this.empresaService.findByMatriz(idMatriz)
+      .subscribe(responseEmpresas => {
+        this.filiais = responseEmpresas;
+      },
+        error => {
+          console.log(error)
+        })
+  }
+
+  esconder(){
+    this.filiais = undefined;
+  }
+
+  detalhar(){
+    console.log('detalhar');
+    
+  }
 }

@@ -43,7 +43,7 @@ export class FuncionarioPage {
           })
       },
       error =>{
-        console.log('não é funcionario');
+        console.log(error);
         
       }
     )
