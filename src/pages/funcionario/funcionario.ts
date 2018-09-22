@@ -40,7 +40,6 @@ export class FuncionarioPage {
         this.funcionarioService.findByPessoa(responseUser.pessoa.id)
           .subscribe(responseFuncinario =>{
             this.funcionario = responseFuncinario
-            console.log(responseFuncinario)
           })
       },
       error =>{
