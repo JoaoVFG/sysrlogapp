@@ -32,7 +32,9 @@ export class RotasPage {
 
   openDetailRota(rotaBuscaResponseDTO : RotaBuscaResponseDTO){
     //console.log(rotaBuscaResponseDTO);
-    this.navCtrl.push('RotaDetailPage', {'rotaBuscaResponseDTO' : rotaBuscaResponseDTO});
+    //this.navCtrl.getPrevious().data.rotaBuscaResponseDTO = rotaBuscaResponseDTO;
+    this.navCtrl.push('RotaDetailPage',{'rotaBuscaResponseDTO' : rotaBuscaResponseDTO});
+    //, {'rotaBuscaResponseDTO' : }
   }
 
   ionViewDidLoad() {

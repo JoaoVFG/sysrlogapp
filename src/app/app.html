@@ -1,4 +1,4 @@
-<ion-menu [content]="content">
+<ion-menu [content]="content" (ionOpen)="getSideMenuData()">
     <ion-header>
         <ion-toolbar>
             <ion-title>Menu</ion-title>
@@ -33,12 +33,12 @@
     </ion-content>
     <ion-footer>
         <ion-toolbar end>
-            <ion-item (click)="logout()" >
+            <ion-item (click)="logout()">
                 <ion-icon name="log-out"></ion-icon>
                 Logout
             </ion-item>
         </ion-toolbar>
-      </ion-footer>
+    </ion-footer>
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->

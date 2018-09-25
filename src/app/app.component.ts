@@ -14,13 +14,13 @@ export class MyApp {
 
   rootPage: string = 'HomePage';
 
-  //pages: Array<{title: string, component: string}>;
-  
+
   pages : any;  
   
 
   //Menu selecionado
   selectedMenu : any;
+
   constructor(
               
               public platform: Platform, 
@@ -30,18 +30,10 @@ export class MyApp {
               public menuProvider: MenuProvider,
               public menuCtrl: MenuController) {
     this.initializeApp();
-    /**
-    this.pages = [
-      { title: 'Profile', component: 'ProfilePage' },
-      { title: 'Rota', component: 'RotaPage'},
-      { title: 'Logout', component: ''}
-    ];
-    */
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.getSideMenuData();
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -62,29 +54,16 @@ export class MyApp {
     }
   }
   
-  /**
-  openPage(page : {title: string, component: string}) {
-    switch(page.title){
-      case 'Logout':
-        this.logout();
-        this.nav.setRoot('HomePage');
-      break;
-      
-      default:
-        this.nav.setRoot(page.component);
 
-    }
-  }
-   */
-  getSideMenuData() {
-    console.log('CARREGANDO MENU');
-    
+  getSideMenuData() {  
     this.pages = this.menuProvider.getSideMenus();
   }
 
   logout(){
     this.storage.eraseLocalStorage();
     this.menuCtrl.close();
+    this.menuProvider.closeMenu();
     this.nav.setRoot('HomePage');
   }
+
 }

@@ -5,16 +5,22 @@ import { Observable } from "rxjs";
 import { User } from "../../models/user.dto";
 import { Role } from "../../models/role.dto";
 import { InsertLoginDTO } from "../../models/inserts/insertLogin.dto";
+import { storageService } from "../storage.service";
 
 @Injectable()
 export class UserService{
-    
-    constructor(public http : HttpClient){
+    public user : User;
+    constructor(public http : HttpClient,
+                public storage : storageService){
 
     }
 
     findById(idUser : string){
         return this.http.get<User>(`${API_CONFIG.baseUrl}/user/buscauser/${idUser}`);
+    }
+
+    findByIdAsync(idUser : string){
+        return this.http.get<User>(`${API_CONFIG.baseUrl}/user/buscauser/${idUser}`,{observe : 'response'});
     }
 
     findAll(){
@@ -51,5 +57,5 @@ export class UserService{
     updateUser( updateUser : User):Observable<any>{
     	return this.http.put(`${API_CONFIG.baseUrl}/pessoa/updateuser$`,updateUser);
     }
-
+    
 }

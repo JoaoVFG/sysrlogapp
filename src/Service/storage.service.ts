@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { JwtHelper } from "angular2-jwt";
 import { cryptService } from "./crypt.service";
+import { User } from "../models/user.dto";
 
 
 @Injectable()
@@ -22,6 +23,11 @@ export class storageService {
         localStorage.setItem('EMAIL_USER', this.jwtHelper.decodeToken(tokenData).email);
         this.destroySecret();
     }
+    
+    saveUser(user : User){
+
+        localStorage.setItem('USER', JSON.stringify(user));
+    }
 
     retrieveToken() : string{
         return localStorage.getItem('TOKEN');
@@ -35,11 +41,17 @@ export class storageService {
     	return localStorage.getItem('ID_USER');
     }
 
+    retrieveUser(): User{
+
+    	return JSON.parse(localStorage.getItem('USER'));
+    }
+
     
     eraseLocalStorage(){
     	localStorage.setItem('TOKEN',null);
     	localStorage.setItem('EMAIL_USER',null);
-    	localStorage.setItem('ID_USER',null);
+        localStorage.setItem('ID_USER',null);
+        localStorage.setItem('USER',null);
     }
 
     destroySecret(){

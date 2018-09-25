@@ -1,49 +1,49 @@
 <ion-header>
 
-  <ion-navbar>
-    <button ion-button menuToggle>
+    <ion-navbar>
+        <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>DETALHES DA EMPRESA</ion-title>
-  </ion-navbar>
+        <ion-title>DETALHES DA EMPRESA</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
-    <ion-card-header>
-      PESSOA
-    </ion-card-header>
-    <ion-card-content>
-      <h2 *ngIf=empresa.pessoa?.razaoSocial>Razão Social: {{empresa.pessoa.razaoSocial}}</h2>
-      <h3 *ngIf=empresa.pessoa?.cnpj>CNPJ: {{empresa.pessoa.cnpj}}</h3>
-      <p *ngIf=empresa.pessoa.tipo?.descricao>Tipo de Pessoa: {{empresa.pessoa.tipo?.descricao}}</p>
-    </ion-card-content>
-  </ion-card>
+    <ion-card>
+        <ion-card-header>
+            PESSOA
+        </ion-card-header>
+        <ion-card-content>
+            <h2 *ngIf=empresa.pessoa?.razaoSocial>Razão Social: {{empresa.pessoa.razaoSocial}}</h2>
+            <h3 *ngIf=empresa.pessoa?.cnpj>CNPJ: {{empresa.pessoa.cnpj}}</h3>
+            <p *ngIf=empresa.pessoa.tipo?.descricao>Tipo de Pessoa: {{empresa.pessoa.tipo?.descricao}}</p>
+        </ion-card-content>
+    </ion-card>
 
-  <ion-card>
-    <ion-card-header>
-      EMPRESA
-    </ion-card-header>
-    <ion-card-content>
-      <h2>Id Empresa: {{empresa.id}}</h2>
-      <h2>Tipo da Empresa: {{empresa.tipoEmpresa.descricao}}</h2>
-      <h2 *ngIf="empresa?.transportadora=='1'"> Categoria : TRANSPORTADORA</h2>
-      <h2 *ngIf="empresa?.transportadora!='1'"> Categoria : OUTRAS</h2>
-      <h2>Id Matriz: {{empresa.empresaMatrizId}}</h2>
-    </ion-card-content>
-  </ion-card>
+    <ion-card>
+        <ion-card-header>
+            EMPRESA
+        </ion-card-header>
+        <ion-card-content>
+            <h2>Id Empresa: {{empresa.id}}</h2>
+            <h2>Tipo da Empresa: {{empresa.tipoEmpresa.descricao}}</h2>
+            <h2 *ngIf="empresa?.transportadora=='1'"> Categoria : TRANSPORTADORA</h2>
+            <h2 *ngIf="empresa?.transportadora!='1'"> Categoria : OUTRAS</h2>
+            <h2>Id Matriz: {{empresa.empresaMatriz}}</h2>
+        </ion-card-content>
+    </ion-card>
 
-  <ion-card>
-    <ion-card-header>
-      <h1>Endereço</h1>
-    </ion-card-header>
-    <ion-card-content>
-      <h2>Cep: {{endereco?.cep.cep}}</h2>
-      <h2>Logradouro : {{endereco?.cep.nomeRua}}</h2>
-      <h2>Número: {{endereco?.numeroLogradouro}}</h2>
-      <h2 *ngIf=endereco?.complemento>Complemento: {{endereco?.complemento}}</h2>
-      <h2>Bairro: {{endereco?.cep.bairro}}</h2>
-      <h2>Cidade: {{endereco?.cep.cidade.nome}}</h2>
-    </ion-card-content>
-  </ion-card>
+    <ion-card>
+        <ion-card-header>
+            <h1>Endereço</h1>
+        </ion-card-header>
+        <ion-card-content>
+            <h2>Cep: {{endereco?.cep.cep}}</h2>
+            <h2>Logradouro : {{endereco?.cep.nomeRua}}</h2>
+            <h2>Número: {{endereco?.numeroLogradouro}}</h2>
+            <h2 *ngIf=endereco?.complemento>Complemento: {{endereco?.complemento}}</h2>
+            <h2>Bairro: {{endereco?.cep.bairro}}</h2>
+            <h2>Cidade: {{endereco?.cep.cidade.nome}}</h2>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
