@@ -5,6 +5,7 @@ import { loginService } from '../../Service/login.service';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
 import { MyApp } from '../../app/app.component';
 import { UserService } from '../../Service/Entity/user.service';
+import { LoginResponse } from '../../models/loginResponse.dto';
 
 @IonicPage()
 @Component({
@@ -31,9 +32,10 @@ export class HomePage {
 
     this.loginService.authenticate(this.logindto)
       .subscribe(async response => {
-        this.token = response.body.toString();
+        let loginResponse : LoginResponse = JSON.parse(response.body);
+
         
-        await this.loginService.sucessfullAuthentication(this.token);
+        this.loginService.sucessfullAuthentication(loginResponse);
         
         this.app.getSideMenuData();
 

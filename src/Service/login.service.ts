@@ -5,6 +5,8 @@ import { HttpClient } from "@angular/common/http";
 import { storageService } from "../Service/storage.service"
 import { cryptService } from "./crypt.service";
 import { UserService } from "./Entity/user.service";
+import { LoginResponse } from "../models/loginResponse.dto";
+
  
 @Injectable()
 export class loginService{
@@ -16,7 +18,7 @@ export class loginService{
     
     }
 
-    authenticate(logindto : loginDTO){
+    authenticate(logindto : loginDTO) {
         return this.http.post(`${API_CONFIG.baseUrl}/login`, 
                             logindto,{
                                 observe:'response',
@@ -24,9 +26,10 @@ export class loginService{
                             });
     }
 
-    async sucessfullAuthentication(token : string){
+    async sucessfullAuthentication(loginResponse : LoginResponse){
         this.crypt.initializeCryptValue();
-        this.storage.saveToken(token);
+        this.storage.saveToken(loginResponse.token);
+        this.storage.saveUser(loginResponse.user);
     }
 
 }

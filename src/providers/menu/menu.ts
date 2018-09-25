@@ -14,19 +14,23 @@ export class MenuProvider {
               public userService : UserService) {
   }
 
+
+
   getSideMenus() {
     
-    this.userService.findByIdAsync(this.storage.retrieveIdUser())
-      .subscribe(response => {
-          this.user = response.body;
-      })
 
-    this.storage.saveUser(this.user);
-
+    
     if (this.menu.length == 0) {
-
       this.user = this.storage.retrieveUser();
-
+      console.log(this.user.roles.findIndex(u => u.id == '1'));
+      if(! (this.user.roles.findIndex(u => u.id == '1')== -1)){
+        console.log('Tem a Permissão');
+      }else{
+        console.log('Não tem Permissão');
+        
+      }
+      
+      //(e => e.cep === cepBusca
       this.menu.push({
         title: 'Profile', component: 'ProfilePage'
       });
