@@ -18,10 +18,13 @@
     </ion-card-header>
 
     <ion-item>Id Empresa: {{empresa?.id}}</ion-item>
+    <ion-item>Tipo da Pessoa : {{empresa?.pessoa.tipo?.descricao}}</ion-item> 
     <ion-item>Razão Social: {{empresa?.pessoa.razaoSocial}}</ion-item>
     <ion-item>CNPJ : {{empresa?.pessoa.cnpj}}</ion-item>
-    <ion-item>Tipo da Empresa: {{empresa?.tipo?.descricao}}</ion-item>
-
+    <ion-item>Tipo da Empresa: {{empresa?.tipoEmpresa?.descricao}}</ion-item>
+    <ion-item *ngIf="empresa?.transportadora=='1'"> Categoria : TRANSPORTADORA</ion-item>
+    <ion-item *ngIf="empresa?.transportadora!='1'"> Categoria : OUTRAS</ion-item>
+    <ion-item >Id Matriz: {{empresa?.empresaMatriz}}</ion-item>
   </ion-card>
 
   <ion-card>
@@ -39,9 +42,16 @@
 
   </ion-card>
 
-  <button *ngIf=!filiais name="btnExibir" ion-button round medium (click)="exibeFiliais()">
+  <button name="btnUpdateEmpresa" ion-button round medium (click)="updateEmpresa()" *ngIf="verificaPermissaoUpdate()">
+    Alterar Empresa
+  </button>
+  <button name="btnCriarNovaEmpresa" ion-button round medium (click)="createEmpresa()" *ngIf="verificaPermissaoCreate()">
+    Criar Nova Empresa
+  </button>
+  <button *ngIf=!filiais name="btnExibir" ion-button block medium (click)="exibeFiliais()">
     Exibir Filiais
   </button>
+
 
   <ion-card *ngIf=filiais>
     <ion-card-header>
@@ -51,13 +61,13 @@
       <ion-list>
         <ion-item *ngFor="let filial of filiais" (click)="openEmpresaDetail(filial)">
           <h3>Id da Empresa: {{filial.id}}</h3>
-          <h2>Nome da Empresa : {{filial.pessoa.razaoSocial}}</h2> 
+          <h2>Nome da Empresa : {{filial.pessoa.razaoSocial}}</h2>
         </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
 
-  <button *ngIf=filiais name="btnEntrar" ion-button round medium (click)="esconder()">
+  <button *ngIf=filiais name="btnEntrar" ion-button block medium (click)="esconder()">
     Esconder Filiais
   </button>
 </ion-content>

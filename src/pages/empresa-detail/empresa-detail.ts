@@ -47,7 +47,6 @@ export class EmpresaDetailPage {
     public enderecoService: EnderecoService) {
 
     this.empresa = this.navParams.get('empresa');
-    console.log(this.empresa)
     this.getEndereco();
 
   }

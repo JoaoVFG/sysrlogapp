@@ -46,8 +46,12 @@ export class EmpresaPage {
           this.funcionarioService.findByPessoa(response.pessoa.id)
             .subscribe(responseFuncionario => {
               this.empresa = responseFuncionario.empresa;
+              console.log(this.empresa);
+              
 
-
+            },error =>{
+              console.log(error);
+              
             })
 
         } else {
@@ -55,12 +59,18 @@ export class EmpresaPage {
             .subscribe(responseEmpresas => {
               this.empresa = responseEmpresas;
 
+            },error =>{
+              console.log(error);
+              
             })
         }
 
         this.enderecoService.findByPessoa(this.storage.retrieveIdUser())
           .subscribe(responseEndereco => {
             this.endereco = responseEndereco;
+          },error =>{
+            console.log(error);
+            
           })
 
       })
@@ -85,12 +95,37 @@ export class EmpresaPage {
         })
   }
 
+  updateEmpresa(){
+    
+  }
+
+  createEmpresa(){
+    this.navCtrl.setRoot('EmpresaCreatePage');
+    
+  }
   esconder(){
     this.filiais = undefined;
   }
 
+  verificaPermissaoUpdate():boolean{
+    let user = this.storage.retrieveUser();
+    if(! (user.roles.findIndex(u => u.id == '11')== -1)){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  verificaPermissaoCreate():boolean{
+    let user = this.storage.retrieveUser();
+    if(! (user.roles.findIndex(u => u.id == '9')== -1)){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   openEmpresaDetail(empresaDetail : Empresa){
-    console.log(empresaDetail);
     this.navCtrl.push('EmpresaDetailPage', {'empresa': empresaDetail})
     
   }

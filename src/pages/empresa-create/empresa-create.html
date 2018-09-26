@@ -1,0 +1,111 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>CADASTRO DE EMPRESA</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+
+<ion-content padding>
+  <form [formGroup]="formGroup">
+    <ion-card>
+      <ion-card-header>Cadastro Pessoa</ion-card-header>
+      <ion-item>
+        <ion-label floating>Razão Social</ion-label>
+        <ion-input formControlName="razaoSocial" type="text"> </ion-input>
+      </ion-item>
+      <p class="danger" *ngIf="formGroup.controls['razaoSocial'].dirty && formGroup.controls['razaoSocial'].errors" margin-left>Valor Inválido!</p>
+      <ion-item>
+        <ion-label floating>CNPJ</ion-label>
+        <ion-input formControlName="cnpj" type="text"> </ion-input>
+      </ion-item>
+      <p class="danger" *ngIf="formGroup.controls['cnpj'].dirty && formGroup.controls['cnpj'].errors" margin-left>Valor Inválido!</p>
+
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>Cadastro de Endereço</ion-card-header>
+      <ion-item>
+        <ion-label floating>CEP</ion-label>
+        <ion-input formControlName="cep" type="text"> </ion-input>
+        <button ion-button large clear item-end>
+          <ion-icon name="search" (click)="verificaCep()"></ion-icon>
+        </button>
+      </ion-item>
+      <p class="danger" *ngIf="formGroup.controls['cep'].dirty && formGroup.controls['cep'].errors" margin-left>Valor Inválido!</p>
+      <ion-item>
+        <h2 *ngIf=cep?.nomeRua>Nome do logradouro : {{cep.nomeRua}}</h2>
+        <h2 *ngIf=cep?.nomeBairro>Bairro : {{cep.nomeBairro}}</h2>
+        <h2 *ngIf=cep?.nomeCidade>Cidade : {{cep.nomeCidade}}</h2>
+        <h2 *ngIf=cep?.nomeEstado>Estado : {{cep.nomeEstado}}</h2>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Número</ion-label>
+        <ion-input formControlName="numeroLogradouro" type="text"> </ion-input>
+      </ion-item>
+      <p class="danger" *ngIf="formGroup.controls['numeroLogradouro'].dirty && formGroup.controls['numeroLogradouro'].errors" margin-left>Valor Inválido!</p>
+      <ion-item>
+        <ion-label floating>Complemento</ion-label>
+        <ion-input formControlName="complemento" type="text"> </ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>Cadastro do Usuário</ion-card-header>
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input formControlName="email" type="text"> </ion-input>
+      </ion-item>
+      <p class="danger" *ngIf="formGroup.controls['email'].dirty && formGroup.controls['email'].errors" margin-left>Valor Inválido!</p>
+      <ion-item>
+        <ion-label floating>Senha</ion-label>
+        <ion-input formControlName="senha" type="password"> </ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>Cadastro da Empresa</ion-card-header>
+
+      <ion-list radio-group formControlName="tipoEmpresa">
+        <ion-list-header>Tipo da Empresa</ion-list-header>
+        <ion-item>
+          <ion-label>MATRIZ</ion-label>
+          <ion-radio checked=true value="1"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>FILIAL</ion-label>
+          <ion-radio value="2"></ion-radio>
+        </ion-item>
+      </ion-list>
+
+      <ion-list radio-group formControlName="transportadora">
+          <ion-list-header>CATEGORIA</ion-list-header>
+          <ion-item>
+            <ion-label>TRANSPORTADORA</ion-label>
+            <ion-radio checked=true value="1"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>OUTRAS</ion-label>
+            <ion-radio value="2"></ion-radio>
+          </ion-item>
+        </ion-list>
+
+        <ion-item>
+            <ion-label floating>CNPJ</ion-label>
+            <ion-input formControlName="empresaMatriz" type="text"> </ion-input>
+            <button ion-button large clear item-end>
+                <ion-icon name="search" (click)="buscaEmpresa()"></ion-icon>
+            </button>
+        </ion-item>
+
+    </ion-card>
+
+
+    <button ion-button block (click)="signupUser()">Criar Conta</button>
+  </form>
+</ion-content>
