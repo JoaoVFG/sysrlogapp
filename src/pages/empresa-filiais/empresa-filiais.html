@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>FILIAIS</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card *ngIf=filiais>
+    <ion-card-header>
+      <h1>Filiais</h1>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let filial of filiais" (click)="openEmpresaDetail(filial)">
+          <h3>Id da Empresa: {{filial.id}}</h3>
+          <h2>Nome da Empresa : {{filial.pessoa.razaoSocial}}</h2>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

@@ -12,22 +12,22 @@
 
 
 <ion-content padding>
-  <ion-card>
+  <ion-card *ngIf="modo == 'consulta'">
     <ion-card-header>
       <h1>Empresa - Info</h1>
     </ion-card-header>
 
     <ion-item>Id Empresa: {{empresa?.id}}</ion-item>
-    <ion-item>Tipo da Pessoa : {{empresa?.pessoa.tipo?.descricao}}</ion-item> 
+    <ion-item>Tipo da Pessoa : {{empresa?.pessoa.tipo?.descricao}}</ion-item>
     <ion-item>Razão Social: {{empresa?.pessoa.razaoSocial}}</ion-item>
     <ion-item>CNPJ : {{empresa?.pessoa.cnpj}}</ion-item>
     <ion-item>Tipo da Empresa: {{empresa?.tipoEmpresa?.descricao}}</ion-item>
     <ion-item *ngIf="empresa?.transportadora=='1'"> Categoria : TRANSPORTADORA</ion-item>
     <ion-item *ngIf="empresa?.transportadora!='1'"> Categoria : OUTRAS</ion-item>
-    <ion-item >Id Matriz: {{empresa?.empresaMatriz}}</ion-item>
+    <ion-item>Id Matriz: {{empresa?.empresaMatriz}}</ion-item>
   </ion-card>
 
-  <ion-card>
+  <ion-card *ngIf="modo == 'consulta'">
     <ion-card-header>
       <h1>Endereço</h1>
     </ion-card-header>
@@ -42,32 +42,65 @@
 
   </ion-card>
 
-  <button name="btnUpdateEmpresa" ion-button round medium (click)="updateEmpresa()" *ngIf="verificaPermissaoUpdate()">
+  <button name="btnUpdateEmpresa" ion-button round medium (click)="alteraModo('altera')" *ngIf="verificaPermissaoUpdate() && modo == 'consulta'">
     Alterar Empresa
   </button>
-  <button name="btnCriarNovaEmpresa" ion-button round medium (click)="createEmpresa()" *ngIf="verificaPermissaoCreate()">
+  <button name="btnCriarNovaEmpresa" ion-button round medium (click)="createEmpresa()" *ngIf="verificaPermissaoCreate() && modo == 'consulta'">
     Criar Nova Empresa
   </button>
-  <button *ngIf=!filiais name="btnExibir" ion-button block medium (click)="exibeFiliais()">
+  <button *ngIf="!filiais && modo == 'consulta'" name="btnExibir" ion-button block medium (click)="exibeFiliais()">
     Exibir Filiais
   </button>
 
 
-  <ion-card *ngIf=filiais>
-    <ion-card-header>
-      <h1>Filiais</h1>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let filial of filiais" (click)="openEmpresaDetail(filial)">
-          <h3>Id da Empresa: {{filial.id}}</h3>
-          <h2>Nome da Empresa : {{filial.pessoa.razaoSocial}}</h2>
+  <form [formGroup]="formGroup">
+    <ion-card *ngIf="modo == 'altera'">
+      <ion-card-header>Cadastro da Empresa</ion-card-header>
+
+      <ion-list radio-group [(ngModel)]="empresa.tipoEmpresa" formControlName="tipoEmpresa">
+        <ion-list-header>Tipo da Empresa</ion-list-header>
+        <ion-item>
+          <ion-label>MATRIZ</ion-label>
+          <ion-radio checked=true value="1"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>FILIAL</ion-label>
+          <ion-radio value="2"></ion-radio>
         </ion-item>
       </ion-list>
-    </ion-card-content>
-  </ion-card>
+      <ion-item>
+        <p></p>
+      </ion-item>
+      <ion-list radio-group [(ngModel)]="empresa.transportadora" formControlName="transportadora">
+        <ion-list-header>CATEGORIA</ion-list-header>
+        <ion-item>
+          <ion-label>TRANSPORTADORA</ion-label>
+          <ion-radio checked=true value="1"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>OUTRAS</ion-label>
+          <ion-radio value="2"></ion-radio>
+        </ion-item>
+      </ion-list>
 
-  <button *ngIf=filiais name="btnEntrar" ion-button block medium (click)="esconder()">
-    Esconder Filiais
+      <ion-item>
+        <ion-label floating>CNPJ</ion-label>
+        <ion-input formControlName="empresaMatriz" type="text"> </ion-input>
+        <button ion-button large clear item-end>
+          <ion-icon name="search" (click)="buscaEmpresa()"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item>
+        <h2 *ngIf="empresaMatrizBusca?.id">Id Empreza Matriz : {{empresaMatrizBusca.id}}</h2>
+        <h2 *ngIf="empresaMatrizBusca?.pessoa.razaoSocial"> Bairro : {{empresaMatrizBusca.pessoa.razaoSocial}}</h2>
+      </ion-item>
+    </ion-card>
+
+    <button name="btnUpdate" ion-button round medium (click)="updateEmpresa()" *ngIf="verificaPermissaoUpdate() && modo == 'altera'">
+      Salvar Empresa
+    </button>
+  </form>
+  <button name="btnUpdate" ion-button round medium (click)="alteraModo('consulta')" *ngIf="verificaPermissaoUpdate() && modo == 'altera'">
+    Cancelar Alteracão
   </button>
 </ion-content>

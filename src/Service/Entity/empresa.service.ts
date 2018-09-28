@@ -50,11 +50,11 @@ export class EmpresaService{
 
 
 
-    deletePessoa( id : string) {
+    deleteEmpresa( id : string) {
     	return this.http.delete(`${API_CONFIG.baseUrl}/empresa/deleta/` + id);
     }
 
-    updatePessoa(idEmpresa : string , updateEmpresa : InsertEmpresa):Observable<any>{
+    updateEmpresa(idEmpresa : string , updateEmpresa : InsertEmpresa):Observable<any>{
     	return this.http.put(`${API_CONFIG.baseUrl}/empresa/update/${idEmpresa}`,updateEmpresa);
     }
 }
