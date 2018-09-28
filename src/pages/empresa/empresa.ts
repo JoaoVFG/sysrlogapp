@@ -46,8 +46,6 @@ export class EmpresaPage {
           this.funcionarioService.findByPessoa(response.pessoa.id)
             .subscribe(responseFuncionario => {
               this.empresa = responseFuncionario.empresa;
-              console.log(this.empresa);
-              
 
             },error =>{
               console.log(error);

@@ -22,19 +22,19 @@ export class PessoaService{
     }
 
     findByTipo(tipo : string) : Observable<Pessoa[]>{
-    	return this.http.get<Pessoa[]>(`${API_CONFIG.baseUrl}/buscapessoa/tipo/${tipo}`);
+    	return this.http.get<Pessoa[]>(`${API_CONFIG.baseUrl}/pessoa/buscapessoa/tipo/${tipo}`);
     }
 
     findByCpf(cpf : string) : Observable<Pessoa>{
-    	return this.http.get<Pessoa>(`${API_CONFIG.baseUrl}/buscapessoa/cpf/${cpf}`);
+    	return this.http.get<Pessoa>(`${API_CONFIG.baseUrl}/pessoa/buscapessoa/cpf/${cpf}`);
     }
 
     findByCnpj(cnpj : string) : Observable<Pessoa>{
-    	return this.http.get<Pessoa>(`${API_CONFIG.baseUrl}/buscapessoa/cnpj/${cnpj}`);
+    	return this.http.get<Pessoa>(`${API_CONFIG.baseUrl}/pessoa/buscapessoa/cnpj/${cnpj}`);
     }
 
     findByRazaoSocial(razaoSocial : string) : Observable<Pessoa[]>{
-    	return this.http.get<Pessoa[]>(`${API_CONFIG.baseUrl}/buscapessoa/razaosocial/${razaoSocial}`);
+    	return this.http.get<Pessoa[]>(`${API_CONFIG.baseUrl}/pessoa/buscapessoa/razaosocial/${razaoSocial}`);
     }
 
 

@@ -37,7 +37,7 @@ export class EmpresaService{
     }
 
     
-    insertPessoaFisica( insertEmpresa :InsertEmpresa ) {
+    insertEmpresa( insertEmpresa :InsertEmpresa ) {
     	return this.http.post(
             `${API_CONFIG.baseUrl}/empresa/insere`,
             insertEmpresa,

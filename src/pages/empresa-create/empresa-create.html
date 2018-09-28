@@ -82,7 +82,7 @@
           <ion-radio value="2"></ion-radio>
         </ion-item>
       </ion-list>
-
+      <ion-item><p></p></ion-item>
       <ion-list radio-group formControlName="transportadora">
           <ion-list-header>CATEGORIA</ion-list-header>
           <ion-item>
@@ -102,10 +102,14 @@
                 <ion-icon name="search" (click)="buscaEmpresa()"></ion-icon>
             </button>
         </ion-item>
+        <ion-item>
+          <h2 *ngIf="empresaMatrizBusca?.id">Id Empreza Matriz : {{empresaMatrizBusca.id}}</h2>
+          <h2 *ngIf="empresaMatrizBusca?.pessoa.razaoSocial"> Bairro : {{empresaMatrizBusca.pessoa.razaoSocial}}</h2>
+        </ion-item>
 
     </ion-card>
 
 
-    <button ion-button block (click)="signupUser()">Criar Conta</button>
+    <button ion-button block (click)="signUpEmpresa()">Criar Conta</button>
   </form>
 </ion-content>

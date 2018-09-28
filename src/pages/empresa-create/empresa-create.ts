@@ -11,6 +11,7 @@ import { LoadingService } from '../../Service/Components/loading.service';
 import { EmpresaService } from '../../Service/Entity/empresa.service';
 import { Pessoa } from '../../models/pessoa.dto';
 import { Empresa } from '../../models/empresa.dto';
+import { InsertEmpresa } from '../../models/inserts/insertEmpresa.dto';
 
 /**
  * Generated class for the EmpresaCreatePage page.
@@ -27,7 +28,22 @@ import { Empresa } from '../../models/empresa.dto';
 export class EmpresaCreatePage {
 
   formGroup: FormGroup;
-  empresaMatrizBusca: Empresa;
+  empresaMatrizBusca: Empresa = {
+    id : '',
+    empresaMatriz : '',
+    pessoa : {
+     cnpj :'',
+     cpf: '',
+     dataNascimento:'',
+     id:'',
+     nome:'',
+     razaoSocial : '',
+     sexo : '',
+     tipo : undefined
+    },
+    tipoEmpresa : undefined,
+    transportadora : ''
+  }
   cep: cep = {
     cep: '',
     nomeRua: '',
@@ -49,33 +65,37 @@ export class EmpresaCreatePage {
 
     this.formGroup = this.formBuilder.group({
 
-      razaoSocial: [''],
-      cnpj: [''],
-      cep: ['', [Validators.required]],
-      numeroLogradouro: ['', [Validators.required]],
-      complemento: [''],
-      email: ['', [Validators.required, Validators.email]],
-      senha: ['', [Validators.required]],
+      razaoSocial: ['trans a 5'],
+      cnpj: ['45678912332165'],
+      cep: ['12285020', [Validators.required]],
+      numeroLogradouro: ['3000', [Validators.required]],
+      complemento: ['galpao 2'],
+      email: ['ta5@ta.com.br', [Validators.required, Validators.email]],
+      senha: ['123', [Validators.required]],
 
-      tipoEmpresa: [''],
-      transportadora: [''],
+      tipoEmpresa: ['1'],
+      transportadora: ['1'],
       empresaMatriz: ['']
 
     })
   }
 
-  signupUser() {
+  signUpEmpresa() {
     let insertEndereco: InsertEnderecoDTO = {
       idPessoa: null,
       cep: this.formGroup.value.cep,
       numeroLogradouro: this.formGroup.value.numeroLogradouro,
       complemento: this.formGroup.value.complemento
     };
+   
     let insertLogin: InsertLoginDTO = {
       idPessoa: null,
       email: this.formGroup.value.email,
       senha: this.formGroup.value.senha,
     };
+
+
+    
     this.insertPj(insertEndereco, insertLogin);
 
 
@@ -96,8 +116,27 @@ export class EmpresaCreatePage {
       this.showErrorAlert();
     } else {
       this.pessoaService.insertPessoaJuridica(pessoa)
-        .subscribe(() => {
-          this.showInsertOk();
+        .subscribe((response) => {
+          let pessoaCriada : Pessoa = JSON.parse(response.body);
+          
+          let idEmpresaMatriz = '';
+          if(this.empresaMatrizBusca.id != '') idEmpresaMatriz = this.empresaMatrizBusca.pessoa.id;
+
+          let empresa : InsertEmpresa = {
+            pessoa : pessoaCriada.id,
+            tipoEmpresa : this.formGroup.value.tipoEmpresa,
+            transportadora : this.formGroup.value.transportadora,
+            empresaMatriz : idEmpresaMatriz
+          }
+          
+          this.empresaService.insertEmpresa(empresa)
+            .subscribe ( (response) => {
+              this.showInsertOk();
+            }, error =>{
+              console.log(error);
+            } )
+
+          
         })
     }
   }
@@ -121,12 +160,14 @@ export class EmpresaCreatePage {
       .subscribe(response => {
 
         pessoa = response;
-
         this.empresaService.findByIdPessoa(pessoa.id)
           .subscribe(responseEmpresa => {
+
+            console.log(this.formGroup);
+            console.log();
+
             this.empresaMatrizBusca = responseEmpresa;
-            console.log(this.empresaMatrizBusca);
-            
+
           }, errorEmpresa => {
             console.log(errorEmpresa)
           })
@@ -146,7 +187,7 @@ export class EmpresaCreatePage {
         {
           text: 'ok',
           handler: () => {
-            this.navCtrl.pop();
+            this.navCtrl.setRoot('EmpresaPage')
           }
         }
       ]

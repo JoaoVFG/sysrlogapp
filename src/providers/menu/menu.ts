@@ -22,11 +22,9 @@ export class MenuProvider {
     
     if (this.menu.length == 0) {
       this.user = this.storage.retrieveUser();
-      console.log(this.user.roles.findIndex(u => u.id == '1'));
+     
       if(! (this.user.roles.findIndex(u => u.id == '1')== -1)){
-        console.log('Tem a Permissão');
-      }else{
-        console.log('Não tem Permissão');
+        console.log('tem');
         
       }
       
