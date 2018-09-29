@@ -71,7 +71,12 @@ export class MenuProvider {
           title: 'Funcionario - Informacões',
           component: 'FuncionarioPage',
         }]
-      });
+      },);
+
+      this.menu.push({
+        title : 'Cargos',
+        component : 'CargoPage' 
+      })
     }
 
     return this.menu;

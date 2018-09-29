@@ -1,0 +1,32 @@
+<ion-header>
+
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>CARGO</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+      <ion-card-header>
+        CADASTRAR NOVO CARGO
+      </ion-card-header>
+      <ion-item>
+          <ion-label floating>Nome do Cargo</ion-label>
+          <ion-input  [(ngModel)]="cargoDescricao" name="cargoDesc" type="text"></ion-input>
+      </ion-item>
+      <button  name="btnCadastrarCargo" ion-button block medium (click)="cadastrarCargo()">
+          Cadastrar Cargo
+        </button>
+    </ion-card>
+
+    <ion-list>
+        <ion-item *ngFor="let cargo of cargos">
+          <h3>Id: {{cargo.id}}</h3>
+          <h2>NOME: {{cargo.descricao}}</h2>
+        </ion-item>
+      </ion-list>
+</ion-content>
