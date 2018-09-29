@@ -51,7 +51,9 @@
   <button *ngIf="!filiais && modo == 'consulta'" name="btnExibir" ion-button block medium (click)="exibeFiliais()">
     Exibir Filiais
   </button>
-
+  <button *ngIf="!filiais && modo == 'consulta'" name="btnExibirFuncionarios" ion-button block medium (click)="exibeFuncionarios()">
+    Exibir Funcionarios
+  </button>
 
   <form [formGroup]="formGroup">
     <ion-card *ngIf="modo == 'altera'">

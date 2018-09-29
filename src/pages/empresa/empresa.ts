@@ -114,6 +114,10 @@ export class EmpresaPage {
 
   }
 
+  exibeFuncionarios(){
+    this.navCtrl.push('EmpresaFuncionarioPage', { 'idEmpresa': this.empresa.id })
+  }
+
   updateEmpresa() {
     
     
