@@ -16,7 +16,7 @@ export class EmpresaFuncionarioPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public funcioraioService : FuncionarioService) {
+    public funcioraioService : FuncionarioService,) {
 
       this.idEmpresa = this.navParams.get('idEmpresa');
       
@@ -37,5 +37,9 @@ export class EmpresaFuncionarioPage {
 
   openFuncionarioDetail(funcionarioDetail: Funcionario) {
     this.navCtrl.push('FuncionarioDetailPage', { 'funcionario': funcionarioDetail })
+  }
+
+  openCreateFuncionario() {
+    this.navCtrl.push('FuncionarioCreatePage', { 'idEmpresa': this.idEmpresa })
   }
 }
