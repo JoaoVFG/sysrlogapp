@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>FUNCIONÁRIO - DETALHES</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+        <ion-card-header>
+          <h2>Funcionário - Info</h2>
+        </ion-card-header>
+        <ion-item>Id do Funcionário: {{funcionario?.id}}</ion-item>
+        <ion-item>Nome do Funcionário: {{funcionario?.pessoa.nome}}</ion-item>
+        <ion-item>Empresa: {{funcionario?.empresa.pessoa.razaoSocial}}</ion-item>
+        <ion-item>Cargo: {{funcionario?.cargo.descricao}}</ion-item>
+      </ion-card>
+</ion-content>

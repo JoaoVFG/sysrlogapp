@@ -34,4 +34,8 @@ export class EmpresaFuncionarioPage {
       })
   }
 
+
+  openFuncionarioDetail(funcionarioDetail: Funcionario) {
+    this.navCtrl.push('FuncionarioDetailPage', { 'funcionario': funcionarioDetail })
+  }
 }

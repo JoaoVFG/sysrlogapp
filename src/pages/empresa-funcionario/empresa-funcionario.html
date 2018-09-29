@@ -10,7 +10,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let funcionario of funcionarios">
+    <ion-item *ngFor="let funcionario of funcionarios" (click)="openFuncionarioDetail(funcionario)">
       <h3>Id: {{funcionario.id}}</h3>
       <h2>NOME: {{funcionario.pessoa.nome}}</h2>
     </ion-item>
