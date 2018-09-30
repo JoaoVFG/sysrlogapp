@@ -55,7 +55,7 @@ export class UserService{
     }
 
     updateUser( updateUser : User):Observable<any>{
-    	return this.http.put(`${API_CONFIG.baseUrl}/pessoa/updateuser$`,updateUser);
+    	return this.http.put(`${API_CONFIG.baseUrl}/user/updateuser`,updateUser);
     }
     
 }

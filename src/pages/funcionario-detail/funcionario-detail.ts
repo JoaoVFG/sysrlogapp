@@ -18,7 +18,7 @@ export class FuncionarioDetailPage {
     public navParams: NavParams,
     public funcionarioService : FuncionarioService) {
       this.funcionario = this.navParams.get('funcionario');
-      console.log(this.funcionario);
+     
       
     }
 

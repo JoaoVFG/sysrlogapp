@@ -76,4 +76,8 @@ export class UserPage {
       })
   }
 
+  openUserDetail(userDetail : User){
+    this.navCtrl.push('UserDetailPage',{'userDetail': userDetail })
+  }
+
 }

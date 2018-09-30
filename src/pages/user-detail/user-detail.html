@@ -1,0 +1,59 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>USUÁRIO</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item *ngIf="modo=='consulta'">
+    <h1>USUÁRIO</h1>
+    <h2>ID : {{user.id}}</h2>
+    <h2>Email : {{user.email}}</h2>
+    <h2>Nome : {{user.pessoa.nome}}</h2>
+  </ion-item>
+
+  <ion-item *ngIf="modo=='consulta'">
+    <h1>AUTORIZAÇÕES</h1>
+    <ion-item *ngFor="let role of user.roles">
+      <h3>Nome da Autorização : {{role.nome}}</h3>
+      <h3>Descrição da Autorização : {{role.descricao}}</h3>
+    </ion-item>
+  </ion-item>
+  <button *ngIf="modo=='consulta'" name="btnAtivaAltera" ion-button round medium (click)="alteraModo('altera')">Alterar Usuário</button>
+
+
+  <form [formGroup]="formGroup" *ngIf="modo=='altera'">
+    <ion-item>
+      <h2>{{user.email}}</h2>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Senha</ion-label>
+        <ion-input formControlName="senha" type="password"> </ion-input>
+      </ion-item>
+      <ion-item>
+          <h1>AUTORIZAÇÕES DO USUÁRIO</h1>
+          <ion-item *ngFor="let role of user.roles">
+            <h3>Nome da Autorização : {{role.nome}}</h3>
+            <h3>Descrição da Autorização : {{role.descricao}}</h3>
+            <ion-icon name="remove-circle" (click)="removeRoleUser(role)"></ion-icon>
+          </ion-item>
+        </ion-item>
+        <ion-item>
+            <h1>AUTORIZAÇÕES DO USUÁRIO</h1>
+            <ion-item *ngFor="let roleOfAll of allRoles">
+              <h3>Nome da Autorização : {{roleOfAll.nome}}</h3>
+              <h3>Descrição da Autorização : {{roleOfAll.descricao}}</h3>
+              <ion-icon name="add-circle" (click)="addRoleUser(roleOfAll)"></ion-icon>
+            </ion-item>
+          </ion-item>
+    <button name="btnSalvarAlteracao" ion-button round medium (click)="alterarUser()">Salvar Alteração</button>
+  </form>
+  <button *ngIf="modo=='altera'" name="btnCalcelaAltera" ion-button round medium (click)="alteraModo('consulta')">Cancelar Alteração</button>
+</ion-content>
