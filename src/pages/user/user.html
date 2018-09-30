@@ -1,0 +1,19 @@
+<ion-header>
+
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>EMPRESA</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+
+
+<ion-content padding>
+  <h2>Usuários da empresa</h2>
+    <ion-item *ngFor="let user of users">
+        <h2>Nome: {{user.pessoa.nome}}</h2>
+        <h2>Email : {{user.email}}</h2>
+    </ion-item>
+</ion-content>

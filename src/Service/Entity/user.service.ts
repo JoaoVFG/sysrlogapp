@@ -32,7 +32,7 @@ export class UserService{
     }
 
     findByEmpresa(idEmpresa : string){
-        return this.http.get<User>(`${API_CONFIG.baseUrl}/user/buscauser/empresa/${idEmpresa}`);        
+        return this.http.get<User[]>(`${API_CONFIG.baseUrl}/user/buscauser/empresa/${idEmpresa}`);        
     }
 
     findRole(){
