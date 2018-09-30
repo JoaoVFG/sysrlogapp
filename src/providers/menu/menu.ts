@@ -77,6 +77,11 @@ export class MenuProvider {
         title : 'Cargos',
         component : 'CargoPage' 
       })
+
+      this.menu.push({
+        title : 'Ceps',
+        component : 'CepsPage' 
+      })
     }
 
     return this.menu;
