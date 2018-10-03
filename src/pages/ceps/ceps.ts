@@ -143,5 +143,6 @@ export class CepsPage {
     this.estadoBusca = '';
     this.bairroBusca = '';
     this.modoBusca = '';
+    this.cepsCompleto = undefined
   }
 }
