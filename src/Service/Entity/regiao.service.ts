@@ -14,19 +14,19 @@ export class RegiaoService{
     }
 
     findAll(){
-        this.http.get<Regiao>(`${API_CONFIG.baseUrl}/regiao/buscaregiao`);
+        return this.http.get<Regiao>(`${API_CONFIG.baseUrl}/regiao/buscaregiao`);
     }
 
     findByEmpresa(idEmpresa : string){
-        this.http.get<Regiao>(`${API_CONFIG.baseUrl}/buscaregiao/empresa/${idEmpresa}`);
+        return this.http.get<Regiao>(`${API_CONFIG.baseUrl}/regiao/buscaregiao/empresa/${idEmpresa}`);
     }
 
     findRegiaoesByEmpresaMatriz(idEmpresa : string){
-        this.http.get<Regiao[]>(`${API_CONFIG}/buscaregiao/empresamatriz/${idEmpresa}`);
+        return this.http.get<Regiao[]>(`${API_CONFIG}/regiao/buscaregiao/empresamatriz/${idEmpresa}`);
     }
 
     deletaRegiao(idRota : string){
-        this.http.delete(`${API_CONFIG}/deleta/${idRota}`);
+        return this.http.delete(`${API_CONFIG}/deleta/${idRota}`);
     }
 
     insertRegiaoByCidade( insertRegiaoByCidade : InsertRegiaoByCidadeDTO){
@@ -63,6 +63,6 @@ export class RegiaoService{
     }
 
     update(regiao : Regiao){
-        this.http.put(`${API_CONFIG}/updateregiao`, regiao);
+        return this.http.put(`${API_CONFIG}/updateregiao`, regiao);
     }
 }
