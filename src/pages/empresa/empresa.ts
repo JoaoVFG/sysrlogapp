@@ -23,7 +23,22 @@ export class EmpresaPage {
 
   formGroup: FormGroup;
   modo: string = 'consulta';
-  empresa: Empresa;
+  empresa: Empresa = {
+    id: '0',
+    empresaMatriz: '',
+    pessoa: {
+      cnpj: '',
+      cpf: '',
+      dataNascimento: '',
+      id: '',
+      nome: '',
+      razaoSocial: '',
+      sexo: '',
+      tipo: undefined
+    },
+    tipoEmpresa: undefined,
+    transportadora: ''
+  };
   endereco: Endereco;
   pessoa: Pessoa;
 
@@ -58,8 +73,8 @@ export class EmpresaPage {
     public alertController: AlertController,) {
 
    this.formGroup = formBuilder.group({
-    tipoEmpresa: ['1'],
-    transportadora: ['1'],
+    tipoEmpresa: ["1"],
+    transportadora: ["1"],
     empresaMatriz: ['']
    })
 
@@ -68,7 +83,7 @@ export class EmpresaPage {
   ionViewDidLoad() {
     this.userService.findById(this.storage.retrieveIdUser())
       .subscribe(response => {
-
+        this.pessoa = response.pessoa;
         if (response.pessoa.tipo.id == '1') {
           this.funcionarioService.findByPessoa(response.pessoa.id)
             .subscribe(responseFuncionario => {
@@ -78,7 +93,7 @@ export class EmpresaPage {
             }, error => {
               //this.navCtrl.setRoot('ProfilePage');
               console.log(error);
-
+              
             })
 
         } else {
@@ -90,6 +105,8 @@ export class EmpresaPage {
             }, error => {
               console.log(error);
               // this.navCtrl.setRoot('ProfilePage');
+
+             
             })
         }
 
@@ -118,10 +135,15 @@ export class EmpresaPage {
     this.navCtrl.push('EmpresaFuncionarioPage', { 'idEmpresa': this.empresa.id })
   }
 
-  updateEmpresa() {
-    
-    
+  update() {
+    if(this.empresa.id == '0') {
+      this.newEmpresa();
+    }else{  
+      this.updateEmpresa();
+    } 
+  }
 
+  updateEmpresa(){
     let idEmpresaMatriz = '';
     if(this.empresaMatrizBusca.id != '') idEmpresaMatriz = this.empresaMatrizBusca.pessoa.id;
     
@@ -132,7 +154,8 @@ export class EmpresaPage {
       transportadora : this.formGroup.value.transportadora,
       empresaMatriz : this.formGroup.value.empresaMatriz
     }
-
+    console.log(updateEmpresa);
+    
 
     this.empresaService.updateEmpresa(this.empresa.id,updateEmpresa)
       .subscribe(response => {
@@ -141,8 +164,23 @@ export class EmpresaPage {
         console.log(error);
         
       })
-    
-    
+  }
+
+  newEmpresa(){
+    let insertEmpresa : InsertEmpresa = {
+      pessoa : this.pessoa.id,
+      tipoEmpresa : this.formGroup.value.tipoEmpresa,
+      transportadora : this.formGroup.value.transportadora,
+      empresaMatriz : this.formGroup.value.empresaMatriz
+    }
+
+    this.empresaService.insertEmpresa(insertEmpresa)
+    .subscribe(response => {
+      this.showUpdateOk();
+    }, error => {
+      console.log(error);
+      
+    })
   }
 
   createEmpresa() {
@@ -170,7 +208,7 @@ export class EmpresaPage {
 
   alteraModo(novoModo: string) {
     if(novoModo == 'altera'){
-      if(! (typeof this.empresa.empresaMatriz == "undefined")) {
+      if(this.empresa.empresaMatriz === undefined) {
         console.log('teste');
         
         this.empresaService.findById(this.empresa.empresaMatriz)
@@ -194,9 +232,6 @@ export class EmpresaPage {
         pessoa = response;
         this.empresaService.findByIdPessoa(pessoa.id)
           .subscribe(responseEmpresa => {
-
-            console.log(this.formGroup);
-            console.log();
 
             this.empresaMatrizBusca = responseEmpresa;
 
@@ -223,6 +258,7 @@ export class EmpresaPage {
         {
           text: 'ok',
           handler: () => {
+            this.ionViewDidLoad();
             this.alteraModo('consulta');
           }
         }

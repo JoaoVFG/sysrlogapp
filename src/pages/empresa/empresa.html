@@ -63,7 +63,7 @@
         <ion-list-header>Tipo da Empresa</ion-list-header>
         <ion-item>
           <ion-label>MATRIZ</ion-label>
-          <ion-radio checked=true value="1"></ion-radio>
+          <ion-radio value="1"></ion-radio>
         </ion-item>
         <ion-item>
           <ion-label>FILIAL</ion-label>
@@ -98,7 +98,7 @@
       </ion-item>
     </ion-card>
 
-    <button name="btnUpdate" ion-button round medium (click)="updateEmpresa()" *ngIf="verificaPermissaoUpdate() && modo == 'altera'">
+    <button name="btnUpdate" ion-button round medium (click)="update()" *ngIf="verificaPermissaoUpdate() && modo == 'altera'">
       Salvar Empresa
     </button>
   </form>
