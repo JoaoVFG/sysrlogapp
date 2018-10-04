@@ -4,7 +4,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>CEPS</ion-title>
+    <ion-title>REGIÃO</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -28,10 +28,14 @@
         <h3>Bairro: {{cep.bairro}}</h3>
         <h3>Cidade : {{cep.cidade.nome}}. Estado : {{cep.cidade.estado.nome}}</h3>
       </ion-item>
-      </ion-item>
+    </ion-item>
 
-      <button *ngIf="exibeCeps == 'exibir'" name="btnEsconder" ion-button block medium (click)="exibirCeps('naoExibir')">
-        Esconder Ceps
-      </button>
+    <button *ngIf="exibeCeps == 'exibir'" name="btnEsconder" ion-button block medium (click)="exibirCeps('naoExibir')">
+      Esconder Ceps
+    </button>
   </ion-card>
+
+  <button *ngIf="!regiao" name="btnCadastroRegiao" ion-button block medium (click)="cadastroRegiao()">
+    Cadastrar Região
+  </button>
 </ion-content>

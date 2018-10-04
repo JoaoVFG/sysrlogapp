@@ -1,0 +1,68 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>CADASTRO DE REGIÃO</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-label floating>Descricao</ion-label>
+    <ion-input [(ngModel)]="descricao" name="descricao" type="text"> </ion-input>
+
+  <h2>Busca de Ceps</h2>
+  <ion-item *ngIf="!cep && !ceps">
+    <ion-select [(ngModel)]="modoBusca" interface="popover">
+      <ion-option value="estadoCidade" (ionSelect)="buscaEstados()">Busca por Estado e Cidade</ion-option>
+      <ion-option value="cidadeBairro" (ionSelect)="buscaEstados()">Busca por Cidade e Bairro</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="modoBusca == 'cep'">
+    <ion-label floating>CEP</ion-label>
+    <ion-input [(ngModel)]="cepBusca" name="cepBusca" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="modoBusca == 'estadoCidade' || modoBusca == 'cidadeBairro'">
+    <ion-label>Estado</ion-label>
+    <ion-select [(ngModel)]="estadoBusca" (ionChange)="buscaCidades()" interface="popover">
+      <ion-option *ngFor="let estado of estados" [value]="estado.sigla">{{estado.nome}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="modoBusca == 'estadoCidade' || modoBusca == 'cidadeBairro'">
+    <ion-label>Cidade</ion-label>
+    <ion-select [(ngModel)]="cidadeBusca" interface="popover">
+      <ion-option *ngFor="let cidade of cidades" [value]="cidade.nome">{{cidade.nome}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="modoBusca == 'cidadeBairro'">
+    <ion-label>Bairro</ion-label>
+    <ion-input [(ngModel)]="bairroBusca" name="bairroBusca"></ion-input>
+  </ion-item>
+
+
+  <button name="btnCreate" *ngIf="cepsCompleto" ion-button block medium (click)="criarRegiao()">
+      Criar Região
+  </button>
+  <button name="btnBusca" *ngIf="!cep && !ceps && !cepsCompleto" ion-button round medium (click)="busca()">
+    Busca
+  </button>
+  <button name="btnNovaBusca" *ngIf="cep || ceps || cepsCompleto" ion-button round medium (click)="novaBusca()">
+    Nova Busca
+  </button>
+  
+
+
+  <ion-card *ngIf="cepsCompleto">
+      <ion-card-header>CEP</ion-card-header>
+      <ion-item *ngFor="let cep of cepsCompleto">
+          <h2>Cep : {{cep.cep}}</h2>
+          <h2>Nome do logradouro : {{cep.nomeRua}}</h2>
+      </ion-item>
+  </ion-card>
+</ion-content>

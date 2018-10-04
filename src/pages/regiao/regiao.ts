@@ -6,6 +6,7 @@ import { UserService } from '../../Service/Entity/user.service';
 import { FuncionarioService } from '../../Service/Entity/funcionario.service';
 import { storageService } from '../../Service/storage.service';
 import { Regiao } from '../../models/regiao.dto';
+import { Empresa } from '../../models/empresa.dto';
 
 /**
  * Generated class for the RegiaoPage page.
@@ -21,17 +22,17 @@ import { Regiao } from '../../models/regiao.dto';
 })
 export class RegiaoPage {
 
-  regiao : Regiao;
+  regiao: Regiao;
   exibeCeps: string = 'naoExibir';
-
+  empresa : Empresa;
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
-    public regiaoService : RegiaoService,
+    public regiaoService: RegiaoService,
     public empresaService: EmpresaService,
     public userService: UserService,
     public funcionarioService: FuncionarioService,
-    public storage: storageService,) {
+    public storage: storageService, ) {
   }
 
   ionViewDidLoad() {
@@ -41,14 +42,16 @@ export class RegiaoPage {
         if (response.pessoa.tipo.id == '1') {
           this.funcionarioService.findByPessoa(response.pessoa.id)
             .subscribe(responseFuncionario => {
+
+              this.empresa = responseFuncionario.empresa; 
+
               this.regiaoService.findByEmpresa(responseFuncionario.empresa.id)
                 .subscribe(response => {
                   this.regiao = response;
-                  console.log(this.regiao);
-                  
-                  
+                }, error => {
+                  console.log(error);
                 })
-              
+
             }, error => {
               //this.navCtrl.setRoot('ProfilePage');
               console.log(error);
@@ -58,13 +61,15 @@ export class RegiaoPage {
         } else {
           this.empresaService.findByIdPessoa(response.pessoa.id)
             .subscribe(responseEmpresas => {
+              this.empresa = responseEmpresas;
               this.regiaoService.findByEmpresa(responseEmpresas.id)
                 .subscribe(response => {
                   this.regiao = response;
-                  console.log(this.regiao);
-                  
+                  console.log(this.regiao)
+                }, error => {
+                  console.log(error);
                 })
-              
+
             }, error => {
               console.log(error);
               this.navCtrl.setRoot('ProfilePage');
@@ -74,8 +79,11 @@ export class RegiaoPage {
       })
   }
 
+  cadastroRegiao() {
+    this.navCtrl.push('RegiaoCreatePage',{'empresa' : this.empresa});
+  }
 
-  exibirCeps(newModo : string){
+  exibirCeps(newModo: string) {
     this.exibeCeps = newModo;
   }
 

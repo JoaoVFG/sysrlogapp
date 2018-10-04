@@ -29,9 +29,12 @@ export class HomePage {
   }
 
   async login(){
-
+    console.log('teste');
+    
     this.loginService.authenticate(this.logindto)
       .subscribe(async response => {
+        console.log(response);
+        
         let loginResponse : LoginResponse = JSON.parse(response.body);
 
         
