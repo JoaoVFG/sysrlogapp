@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>CEPS</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content padding>
+  <ion-card *ngIf="regiao">
+    <ion-card-header>
+      INFORMAÇÕES DA REGIÃO CADASTRADA
+    </ion-card-header>
+    <h2>Identificação: {{regiao.id}}</h2>
+    <h2>Cadastrado para : {{regiao.empresa.pessoa.razaoSocial}}</h2>
+    <h2>Descrição da Rota : {{regiao.descricao}}</h2>
+    <button *ngIf="exibeCeps == 'naoExibir'" name="btnExibir" ion-button block medium (click)="exibirCeps('exibir')">
+      Exibir Ceps
+    </button>
+    <ion-item *ngIf="exibeCeps == 'exibir'">
+      <ion-item *ngFor="let cep of regiao.ceps">
+        <h2>Cep: {{cep.cep}}</h2>
+        <h2>Logradouro: {{cep.nomeRua}}</h2>
+        <h3>Bairro: {{cep.bairro}}</h3>
+        <h3>Cidade : {{cep.cidade.nome}}. Estado : {{cep.cidade.estado.nome}}</h3>
+      </ion-item>
+      </ion-item>
+
+      <button *ngIf="exibeCeps == 'exibir'" name="btnEsconder" ion-button block medium (click)="exibirCeps('naoExibir')">
+        Esconder Ceps
+      </button>
+  </ion-card>
+</ion-content>

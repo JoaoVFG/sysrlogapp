@@ -87,6 +87,11 @@ export class MenuProvider {
         title : 'Usuários',
         component : 'UserPage' 
       })
+
+      this.menu.push({
+        title : 'Regiao',
+        component : 'RegiaoPage'
+      })
     }
 
     return this.menu;
