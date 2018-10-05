@@ -1,0 +1,87 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>ALTERAÇÃO DE REGIÃO</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-label>Descricao</ion-label>
+    <ion-input [(ngModel)]="regiao.descricao" name="descricao" type="text"> </ion-input>
+
+
+    <ion-item *ngIf="regiao.ceps">
+      <h1>CEPS DA REGIÃO</h1>
+      <ion-item *ngFor="let cep of regiao.ceps">
+        <h3>CEP : {{cep.cep}}</h3>
+        <h3>Nome rua : {{cep.nomeRua}}</h3>
+        <ion-icon name="remove-circle" (click)="removeCepFromRegiao(cep)"></ion-icon>
+      </ion-item>
+      <button name="btnBusca" ion-button round medium (click)="removerTodos()">
+          REMOVER TODOS
+      </button>
+    </ion-item>
+
+
+
+  <h2>Adição de Ceps</h2>
+  <ion-item *ngIf="!cep && !ceps">
+    <ion-label>Selecionar modo de Busca</ion-label>
+    <ion-select [(ngModel)]="modoBusca" interface="popover">
+      <ion-option value="estadoCidade" (ionSelect)="buscaEstados()">Busca por Estado e Cidade</ion-option>
+      <ion-option value="cidadeBairro" (ionSelect)="buscaEstados()">Busca por Cidade e Bairro</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="modoBusca == 'cep'">
+    <ion-label floating>CEP</ion-label>
+    <ion-input [(ngModel)]="cepBusca" name="cepBusca" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="modoBusca == 'estadoCidade' || modoBusca == 'cidadeBairro'">
+    <ion-label>Estado</ion-label>
+    <ion-select [(ngModel)]="estadoBusca" (ionChange)="buscaCidades()" interface="popover">
+      <ion-option *ngFor="let estado of estados" [value]="estado.sigla">{{estado.nome}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="modoBusca == 'estadoCidade' || modoBusca == 'cidadeBairro'">
+    <ion-label>Cidade</ion-label>
+    <ion-select [(ngModel)]="cidadeBusca" interface="popover">
+      <ion-option *ngFor="let cidade of cidades" [value]="cidade.nome">{{cidade.nome}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="modoBusca == 'cidadeBairro'">
+    <ion-label>Bairro</ion-label>
+    <ion-input [(ngModel)]="bairroBusca" name="bairroBusca"></ion-input>
+  </ion-item>
+
+
+  
+  <ion-card *ngIf="cepsCompleto">
+      <ion-card-header>CEP</ion-card-header>
+      <ion-item *ngFor="let cep of cepsCompleto">
+          <h2>Cep : {{cep.cep}}</h2>
+          <h2>Nome do logradouro : {{cep.nomeRua}}</h2>
+          <ion-icon name="add-circle" (click)="addCepToRegiao(cep)"></ion-icon>
+      </ion-item>
+      <button name="btnBusca" ion-button round medium (click)="adicionarTodos()">
+          ADICIONAR TODOS
+      </button>
+  </ion-card>
+
+  <button name="btnBusca" *ngIf="!cep && !ceps && !cepsCompleto" ion-button round medium (click)="busca()">
+    Busca
+  </button>
+  <button name="btnNovaBusca" *ngIf="cep || ceps || cepsCompleto" ion-button round medium (click)="novaBusca()">
+    Nova Busca
+  </button>
+  <button name="btnBusca" ion-button round medium (click)="salvarAlteracao()">
+      SALVAR ALTERAÇÕES
+    </button>
+</ion-content>

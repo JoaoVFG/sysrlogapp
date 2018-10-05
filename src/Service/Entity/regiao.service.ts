@@ -63,6 +63,6 @@ export class RegiaoService{
     }
 
     update(regiao : Regiao){
-        return this.http.put(`${API_CONFIG}/updateregiao`, regiao);
+        return this.http.put(`${API_CONFIG.baseUrl}/regiao/updateregiao`, regiao);
     }
 }

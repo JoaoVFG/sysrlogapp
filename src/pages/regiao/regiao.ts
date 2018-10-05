@@ -32,7 +32,7 @@ export class RegiaoPage {
     public empresaService: EmpresaService,
     public userService: UserService,
     public funcionarioService: FuncionarioService,
-    public storage: storageService, ) {
+    public storage: storageService) {
   }
 
   ionViewDidLoad() {
@@ -53,7 +53,7 @@ export class RegiaoPage {
                 })
 
             }, error => {
-              //this.navCtrl.setRoot('ProfilePage');
+              
               console.log(error);
 
             })
@@ -65,22 +65,28 @@ export class RegiaoPage {
               this.regiaoService.findByEmpresa(responseEmpresas.id)
                 .subscribe(response => {
                   this.regiao = response;
-                  console.log(this.regiao)
+                 
                 }, error => {
                   console.log(error);
                 })
 
             }, error => {
               console.log(error);
-              this.navCtrl.setRoot('ProfilePage');
+              
             })
         }
 
+      }, error =>{
+        console.log(error);
+        
       })
   }
 
   cadastroRegiao() {
     this.navCtrl.push('RegiaoCreatePage',{'empresa' : this.empresa});
+  }
+  alteraRegiao() {
+    this.navCtrl.push('RegiaoUpdatePage',{'regiao' : this.regiao});
   }
 
   exibirCeps(newModo: string) {

@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { CepService } from '../../Service/Entity/cep.service';
+import { RegiaoService } from '../../Service/Entity/regiao.service';
 import { Empresa } from '../../models/empresa.dto';
 import { cep } from '../../models/cep.dto';
 import { CepCompleto } from '../../models/cepCompleto.dto';
 import { Cidade } from '../../models/cidade.dto';
 import { Estado } from '../../models/estado.dto';
-import { CepService } from '../../Service/Entity/cep.service';
 import { InsertRegiaoByCidadeDTO } from '../../models/regiao/InsertRegiaoByCidade.dto';
 import { InsertRegiaoByBairroDTO } from '../../models/regiao/insertRegiaoByBairro.dto';
-import { RegiaoService } from '../../Service/Entity/regiao.service';
 import { Regiao } from '../../models/regiao.dto';
 
 /**
- * Generated class for the RegiaoCreatePage page.
+ * Generated class for the RegiaoUpdatePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -20,23 +20,22 @@ import { Regiao } from '../../models/regiao.dto';
 
 @IonicPage()
 @Component({
-  selector: 'page-regiao-create',
-  templateUrl: 'regiao-create.html',
+  selector: 'page-regiao-update',
+  templateUrl: 'regiao-update.html',
 })
-export class RegiaoCreatePage {
+export class RegiaoUpdatePage {
+
   empresa: Empresa;
   regiao: Regiao;
-
-  ceps: cep[];
   cepsCompleto: CepCompleto[];
   cep: cep;
-
+  updateDescricao: string;
   modoBusca: string = '';
 
   cidades: Cidade[];
   estados: Estado[];
 
-  descricao: string;
+
 
   cepBusca: string;
   cidadeBusca: string;
@@ -49,58 +48,73 @@ export class RegiaoCreatePage {
     public cepService: CepService,
     public regiaoService: RegiaoService,
     public alertController: AlertController) {
-    this.empresa = this.navParams.get('empresa');
-    console.log(this.empresa);
-
+    this.regiao = this.navParams.get('regiao');
   }
 
   ionViewDidLoad() {
-    this.regiaoService.findByEmpresa(this.empresa.id)
+
+  }
+
+  criarRegiao() {
+
+  }
+
+  removeCepFromRegiao(cep: CepCompleto) {
+
+
+    let index = this.regiao.ceps.findIndex(c => c.id == cep.id);
+    this.regiao.ceps.splice(index, 1);
+
+
+  }
+
+  addCepToRegiao(cep: CepCompleto) {
+    let index = this.cepsCompleto.findIndex(c => c.id == cep.id);
+    this.cepsCompleto.splice(index, 1);
+    if (this.verificaCadastrado(cep)) {
+      this.regiao.ceps.push(cep)
+    } else {
+      console.log('Ja esta cadastrado');
+    }
+
+  }
+
+  adicionarTodos() {
+
+    this.cepsCompleto.forEach(cep => {
+      let index = this.cepsCompleto.findIndex(c => c.id == cep.id);
+      if (this.verificaCadastrado(cep)) {
+        this.regiao.ceps.push(cep)
+      } else {
+        console.log('Ja esta cadastrado');
+      }
+    })
+
+    this.cepsCompleto = [];
+    
+  }
+
+  removerTodos() {
+    this.regiao.ceps = [];
+  }
+
+  salvarAlteracao() {
+    this.regiaoService.update(this.regiao)
       .subscribe(response => {
         console.log(response);
-        
-        this.regiao = response;
-      }, error =>{
+        this.navCtrl.setRoot('RegiaoPage')
+      }, error => {
         console.log(error);
         
       })
   }
 
-
-  criarRegiao() {
-    if (this.modoBusca == 'estadoCidade') {
-      let insertRegiao: InsertRegiaoByCidadeDTO = {
-        cidade: this.cidadeBusca,
-        descricao: this.descricao,
-        empresaId: this.empresa.id,
-        estado: this.estadoBusca
-      }
-
-      this.regiaoService.insertRegiaoByCidade(insertRegiao)
-        .subscribe(response => {
-          this.showInsertOk();
-
-        }, error => {
-          console.log(error);
-
-        })
-
+  verificaCadastrado(cep: CepCompleto): boolean {
+    let index = this.regiao.ceps.findIndex(c => c.id == cep.id)
+    if (index == -1) {
+      return true;
     } else {
-      let insertRegiao: InsertRegiaoByBairroDTO = {
-        cidade: this.cidadeBusca,
-        descricao: this.descricao,
-        empresaId: this.empresa.id,
-        bairro: this.bairroBusca
-      }
-
-      this.regiaoService.insertRegiaoByBairro(insertRegiao)
-        .subscribe(response => {
-          this.showInsertOk();
-
-        }, error => {
-          console.log(error);
-
-        })
+      return false;
     }
   }
 
@@ -184,7 +198,6 @@ export class RegiaoCreatePage {
   }
 
   novaBusca() {
-    this.ceps = undefined;
     this.cep = undefined;
     this.cepBusca = '';
     this.cidadeBusca = '';
@@ -193,4 +206,5 @@ export class RegiaoCreatePage {
     this.modoBusca = '';
     this.cepsCompleto = undefined
   }
+
 }
