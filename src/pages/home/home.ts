@@ -28,17 +28,14 @@ export class HomePage {
               
   }
 
-  async login(){
-    console.log('teste');
-    
+  async login(){ 
     this.loginService.authenticate(this.logindto)
       .subscribe(async response => {
-        console.log(response);
         
         let loginResponse : LoginResponse = JSON.parse(response.body);
 
         
-        this.loginService.sucessfullAuthentication(loginResponse);
+        await this.loginService.sucessfullAuthentication(loginResponse);
         
         this.app.getSideMenuData();
 

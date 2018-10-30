@@ -27,9 +27,8 @@ export class loginService{
     }
 
     async sucessfullAuthentication(loginResponse : LoginResponse){
-        this.crypt.initializeCryptValue();
-        this.storage.saveToken(loginResponse.token);
-        this.storage.saveUser(loginResponse.user);
+        await this.storage.saveToken(loginResponse.token);
+        await this.storage.saveUser(loginResponse.user);
     }
 
 }

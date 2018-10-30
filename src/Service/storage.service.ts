@@ -14,27 +14,26 @@ export class storageService {
         
     }
     
-    saveToken(token : string){
-        this.crypt.initializeCryptValue();
+    async saveToken(token : string){
 		let tokenData = token.substring(7);
-        
-        localStorage.setItem('TOKEN', token);    
-        localStorage.setItem('ID_USER', this.jwtHelper.decodeToken(tokenData).idUser);
-        localStorage.setItem('EMAIL_USER', this.jwtHelper.decodeToken(tokenData).email);
-        this.destroySecret();
+            
+        localStorage.setItem('TOKEN', await this.crypt.encrypt(token));    
+        localStorage.setItem('ID_USER', await this.jwtHelper.decodeToken(tokenData).idUser);
+        localStorage.setItem('EMAIL_USER', await this.crypt.encrypt(this.jwtHelper.decodeToken(tokenData).email));
+
     }
     
     saveUser(user : User){
 
-        localStorage.setItem('USER', JSON.stringify(user));
+        localStorage.setItem('USER', this.crypt.encrypt(JSON.stringify(user)));
     }
 
     retrieveToken() : string{
-        return localStorage.getItem('TOKEN');
+        return this.crypt.decrypt(localStorage.getItem('TOKEN'));
     }
 
     retriveEmail() : string{
-    	return localStorage.getItem('EMAIL_USER');
+    	return this.crypt.decrypt(localStorage.getItem('EMAIL_USER'));
     }
 
     retrieveIdUser(): string{
@@ -43,7 +42,7 @@ export class storageService {
 
     retrieveUser(): User{
 
-    	return JSON.parse(localStorage.getItem('USER'));
+    	return JSON.parse(this.crypt.decrypt(localStorage.getItem('USER')));
     }
 
     
@@ -54,8 +53,6 @@ export class storageService {
         localStorage.setItem('USER',null);
     }
 
-    destroySecret(){
-        localStorage.removeItem('SECRET');
-    }
+
 
 }    

@@ -22,11 +22,8 @@ export class MenuProvider {
     
     if (this.menu.length == 0) {
       this.user = this.storage.retrieveUser();
+
      
-      if(! (this.user.roles.findIndex(u => u.id == '1')== -1)){
-        console.log('tem');
-        
-      }
       
       //(e => e.cep === cepBusca
       this.menu.push({
