@@ -47,10 +47,10 @@ export class storageService {
 
     
     eraseLocalStorage(){
-    	localStorage.setItem('TOKEN',null);
-    	localStorage.setItem('EMAIL_USER',null);
-        localStorage.setItem('ID_USER',null);
-        localStorage.setItem('USER',null);
+    	localStorage.setItem('TOKEN','');
+    	localStorage.setItem('EMAIL_USER','');
+        localStorage.setItem('ID_USER','');
+        localStorage.setItem('USER','');
     }
 
 

@@ -6,25 +6,25 @@ import { enc } from 'crypto-js'; // For characters encodages types (Utf-8, latin
 @Injectable()
 export class cryptService{
 
-	secret = 'aaaaaaaaaaaaaaaaaaaaa'
+	secret = 'AUISHD98jpiOSHFP9W8R@981QW!JD-9io%afpoIUan'
 	public cryptValue : string;
-	constructor(/**private mapConfig: mapConfigService**/){
+	constructor(private mapConfig: mapConfigService){
 	}
 
 	encrypt(dataToEncrypt : string) : string{
-	
-		let encrypted = AES.encrypt(dataToEncrypt, this.secret);
+		console.log('ENCRYPT');
+		
+		let encrypted = AES.encrypt(dataToEncrypt,  this.secret);
 		return encrypted.toString();
 	}
 
 	decrypt(dataToDecrypt : string) : string{
 
-		let bytes  = AES.decrypt(dataToDecrypt, this.secret);
+		let bytes  = AES.decrypt(dataToDecrypt,  this.secret);
 		let decrypted = bytes.toString(enc.Utf8);
 		return decrypted;
 	}
-	
-	
-	
+
+
 
 }

@@ -9,8 +9,8 @@ export class mapConfigService{
     
     }
     
-    findCrypto(){
-        return this.http.get(`${API_CONFIG.baseUrl}/configs/buscacrypto`,{
+    async findCrypto() {
+            return await this.http.get(`${API_CONFIG.baseUrl}/configs/buscacrypto`,{
                                 observe:'response',
                                 responseType : 'text'
                             });
