@@ -24,6 +24,7 @@ export class PessoaPage {
     roles: [],
     senha: '',
     pessoa: undefined,
+    apiKey:''
   }
   modo: string = 'Consulta';
   formGroup: FormGroup;

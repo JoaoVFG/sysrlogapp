@@ -24,9 +24,11 @@ export class ProfilePage {
     roles: [],
     senha: '',
     pessoa: undefined,
+    apiKey: ''
   }
   email: string;
   endereco: Endereco;
+  apiKey = '';
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public pessoaService: PessoaService,
@@ -43,6 +45,7 @@ export class ProfilePage {
 
     this.userService.findById(this.storage.retrieveIdUser())
       .subscribe(responseUser => {
+        this.apiKey = responseUser.apiKey;
         this.pessoa = responseUser.pessoa;
         this.enderecoService.findByPessoa(this.pessoa.id)
           .subscribe(responseEnd => {

@@ -54,7 +54,8 @@ export class UserDetailPage {
       id : this.user.id,
       pessoa : this.user.pessoa,
       senha : this.user.senha,
-      roles : this.user.roles
+      roles : this.user.roles,
+      apiKey: ''
     }
 
     if(this.formGroup.value.senha){

@@ -7,4 +7,5 @@ export interface User{
     senha : string;
     pessoa : Pessoa;
     roles : Role[];
+    apiKey : string;
 }
