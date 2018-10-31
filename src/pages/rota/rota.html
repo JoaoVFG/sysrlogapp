@@ -10,16 +10,16 @@
 
 
 <ion-content padding>
-    <ion-item *ngIf="!rotaResponse?.rota">
+    <ion-item *ngIf="!rotaResponse?.rota && listaEndereco.waypoints.length < 9">
         <ion-label floating>CEP</ion-label>
         <ion-input [(ngModel)]="enderecoEntrega.cep" name="enderecoCep" type="text"></ion-input>
     </ion-item>
-    <ion-item *ngIf="!rotaResponse?.rota">
+    <ion-item *ngIf="!rotaResponse?.rota && listaEndereco.waypoints.length < 9">
         <ion-label floating>NUM</ion-label>
         <ion-input [(ngModel)]="enderecoEntrega.numeroLogradouro" name="enderecoNum" type="text"></ion-input>
     </ion-item>
 
-    <button *ngIf="!rotaResponse?.rota" name="btnAdicionar" ion-button round medium (click)="validaCep()">Adicionar</button>
+    <button *ngIf="!rotaResponse?.rota && listaEndereco.waypoints.length < 9" name="btnAdicionar" ion-button round medium (click)="validaCep()">Adicionar</button>
     <button *ngIf="!rotaResponse?.rota" name="btnGerar" ion-button round medium (click)="gerarRota()">Gerar Rota</button>
 
     <ion-card *ngIf="rotaResponse?.rota">

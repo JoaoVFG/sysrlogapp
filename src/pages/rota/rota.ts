@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { RotaService } from '../../Service/rota.service';
 import { listaEnderecoEntregaDTO } from '../../models/rota/listaenderecoentrega.dto';
 import { enderecoEntregaDTO } from '../../models/rota/enderecoentrega.dto';
@@ -57,7 +57,8 @@ export class RotaPage {
     public rotaService: RotaService,
     public storage: storageService,
     public loadingService: LoadingService,
-    public cepService: CepService) {
+    public cepService: CepService,
+    public alert: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -75,20 +76,18 @@ export class RotaPage {
   }
 
   addToList() {
+
     this.listaEndereco.waypoints.push({
       cep: this.enderecoEntrega.cep,
       numeroLogradouro: this.enderecoEntrega.numeroLogradouro
     });
     this.enderecoEntrega.cep = '';
     this.enderecoEntrega.numeroLogradouro = '';
+
+    this.verificaLimite();
   }
 
   removeOfList(cepBusca: string, numLogradouro: string) {
-    let waypoints: enderecoEntregaDTO = {
-      cep: cepBusca,
-      numeroLogradouro: numLogradouro
-    }
-
 
     let index: number = this.listaEndereco.waypoints.findIndex
       (e => e.cep === cepBusca && e.numeroLogradouro === numLogradouro);
@@ -114,6 +113,26 @@ export class RotaPage {
 
   abrirMaps() {
     window.location.assign(this.rotaResponse.rota);
+  }
+
+  verificaLimite() {
+    if (this.listaEndereco.waypoints.length === 9) {
+      let alert = this.alert.create({
+        title: 'LIMITE ATINGIDO',
+        message: 'Limite de Pontos para Roteirização foi atingido',
+        enableBackdropDismiss: false,
+        buttons: [
+          {
+            text: 'Ok',
+          }
+        ]
+      })
+      alert.present();
+
+    } else {
+      console.log('LIMITE NÃO ATINGIDO');
+
+    }
   }
   /**
     initializeMap() {
