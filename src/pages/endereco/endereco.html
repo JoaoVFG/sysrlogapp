@@ -23,7 +23,7 @@
       <h2>Cidade: {{endereco?.cep.cidade.nome}}</h2>
     </ion-card-content>
   </ion-card>
-  <button *ngIf="modo=='Consulta'" name="btnAtivaAltera" ion-button round medium (click)="alteraModo('Altera')">Alterar Endereço</button>
+  <button *ngIf="modo=='Consulta' && verificaPermissaoAlterarEndereco()" name="btnAtivaAltera" ion-button round medium (click)="alteraModo('Altera')">Alterar Endereço</button>
   
   
   <form [formGroup]="formGroup">

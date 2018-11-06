@@ -206,6 +206,24 @@ export class EmpresaPage {
     }
   }
 
+  verificaPermissaoBuscaFiliais(): boolean {
+    let user = this.storage.retrieveUser();
+    if (!(user.roles.findIndex(u => u.id == '12') == -1)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  verificaPermissaoBuscaFuncionarios(): boolean {
+    let user = this.storage.retrieveUser();
+    if (!(user.roles.findIndex(u => u.id == '17') == -1)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   alteraModo(novoModo: string) {
     if(novoModo == 'altera'){
       if(this.empresa.empresaMatriz === undefined) {

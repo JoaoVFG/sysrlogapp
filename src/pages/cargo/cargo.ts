@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CargoService } from '../../Service/Entity/cargo.service';
 import { Cargo } from '../../models/cargo.dto';
 import { LoadingService } from '../../Service/Components/loading.service';
+import { storageService } from '../../Service/storage.service';
 
 /**
  * Generated class for the CargoPage page.
@@ -23,7 +24,8 @@ export class CargoPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public cargoService : CargoService) {
+    public cargoService : CargoService,
+    public storage: storageService) {
   }
 
   ionViewDidLoad() {
@@ -41,8 +43,6 @@ export class CargoPage {
   }
 
   cadastrarCargo(){
-
-
     this.cargoService.insertCargo(this.cargoDescricao)
       .subscribe(response => {
           this.cargoDescricao = '';
@@ -52,6 +52,15 @@ export class CargoPage {
         
       })
     
+  }
+
+  verificaPermissaoCriacaoCargo(): boolean {
+    let user = this.storage.retrieveUser();
+    if (!(user.roles.findIndex(u => u.id == '2') == -1)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }

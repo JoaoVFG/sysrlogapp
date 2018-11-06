@@ -101,6 +101,15 @@ export class EnderecoPage {
 
   }
 
+  verificaPermissaoAlterarEndereco(){
+    let user = this.storage.retrieveUser();
+    if (!(user.roles.findIndex(u => u.id == '8') == -1)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   showUpdateOk() {
     let alert = this.alertController.create({
       title: 'Sucesso!',

@@ -85,8 +85,27 @@ export class RegiaoPage {
   cadastroRegiao() {
     this.navCtrl.push('RegiaoCreatePage',{'empresa' : this.empresa});
   }
+
   alteraRegiao() {
     this.navCtrl.push('RegiaoUpdatePage',{'regiao' : this.regiao});
+  }
+
+  verificaPermissaoAlteraRegiao(): boolean {
+    let user = this.storage.retrieveUser();
+    if (!(user.roles.findIndex(u => u.id == '30') == -1)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  verificaPermissaoCriaRegiao(): boolean {
+    let user = this.storage.retrieveUser();
+    if (!(user.roles.findIndex(u => u.id == '28') == -1)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   exibirCeps(newModo: string) {

@@ -15,8 +15,8 @@ import { LoginResponse } from '../../models/loginResponse.dto';
 export class HomePage {
   
   logindto : loginDTO = {
-    email : '',
-    senha:'',
+    email : 'transportadoracpv@gmail.com',
+    senha:'123',
    }
   
   token : string;

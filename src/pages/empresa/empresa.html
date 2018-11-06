@@ -48,10 +48,10 @@
   <button name="btnCriarNovaEmpresa" ion-button round medium (click)="createEmpresa()" *ngIf="verificaPermissaoCreate() && modo == 'consulta'">
     Criar Nova Empresa
   </button>
-  <button *ngIf="!filiais && modo == 'consulta'" name="btnExibir" ion-button block medium (click)="exibeFiliais()">
+  <button *ngIf="!filiais && modo == 'consulta' && verificaPermissaoBuscaFiliais()" name="btnExibir" ion-button block medium (click)="exibeFiliais()">
     Exibir Filiais
   </button>
-  <button *ngIf="!filiais && modo == 'consulta'" name="btnExibirFuncionarios" ion-button block medium (click)="exibeFuncionarios()">
+  <button *ngIf="!filiais && modo == 'consulta' && verificaPermissaoBuscaFuncionarios()" name="btnExibirFuncionarios" ion-button block medium (click)="exibeFuncionarios()">
     Exibir Funcionarios
   </button>
 

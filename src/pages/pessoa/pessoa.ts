@@ -95,6 +95,17 @@ export class PessoaPage {
     this.modo = newModo;
   }
 
+  verificaPermissaoAlterarPessoa(){
+    let user = this.storage.retrieveUser();
+    console.log('teste');
+    
+    if (!(user.roles.findIndex(u => u.id == '19') == -1)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   showUpdateOk() {
     let alert = this.alertController.create({
       title: 'Sucesso!',

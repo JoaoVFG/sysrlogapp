@@ -12,7 +12,7 @@ export class cryptService{
 	}
 
 	encrypt(dataToEncrypt : string) : string{
-		console.log('ENCRYPT');
+
 		
 		let encrypted = AES.encrypt(dataToEncrypt,  this.secret);
 		return encrypted.toString();

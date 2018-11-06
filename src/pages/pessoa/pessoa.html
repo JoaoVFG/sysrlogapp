@@ -26,7 +26,7 @@
       <p *ngIf=pessoa?.tipo?.descricao>Tipo de Pessoa: {{pessoa?.tipo?.descricao}}</p>
     </ion-card-content>
   </ion-card>
-  <button *ngIf="modo=='Consulta'" name="btnAtivaAltera" ion-button round medium (click)="alteraModo('Altera')">Alterar Pessoa</button>
+  <button *ngIf="modo=='Consulta' && verificaPermissaoAlterarPessoa()" name="btnAtivaAltera" ion-button round medium (click)="alteraModo('Altera')">Alterar Pessoa</button>
 
   <form [formGroup]="formGroup">
     <ion-card *ngIf="modo=='Altera'">
