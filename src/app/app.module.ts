@@ -19,10 +19,10 @@ import { RotaService } from '../Service/rota.service';
 import { CepService } from '../Service/Entity/cep.service';
 import { UserService } from '../Service/Entity/user.service';
 import { EnderecoService } from '../Service/Entity/endereco.service';
-import { MenuProvider } from '../providers/menu/menu';
 import { FuncionarioService } from '../Service/Entity/funcionario.service';
 import { CargoService } from '../Service/Entity/cargo.service';
 import { EmpresaService } from '../Service/Entity/empresa.service';
+import { ValidacaoService } from '../Service/validacao.service';
 
 
 @NgModule({
@@ -47,6 +47,7 @@ import { EmpresaService } from '../Service/Entity/empresa.service';
     mapConfigService,
     cryptService,
     storageService,
+    ValidacaoService,
     loginService,
     AuthInterceptorProvider,
     ErrorInterceptorProvider,
@@ -55,7 +56,6 @@ import { EmpresaService } from '../Service/Entity/empresa.service';
     PessoaService,
     EnderecoService,
     UserService,
-    MenuProvider,
     FuncionarioService,
     CargoService,
     EmpresaService
