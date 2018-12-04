@@ -10,21 +10,30 @@
 
 
 <ion-content padding>
-    <ion-label>Descricao</ion-label>
-    <ion-input [(ngModel)]="regiao.descricao" name="descricao" type="text"> </ion-input>
+  <ion-label>Descricao</ion-label>
+  <ion-input [(ngModel)]="regiao.descricao" name="descricao" type="text"> </ion-input>
 
 
-    <ion-item *ngIf="regiao.ceps">
-      <h1>CEPS DA REGIÃO</h1>
+  <ion-item *ngIf="regiao.ceps">
+    <h1>CEPS DA REGIÃO</h1>
+    <button name="btnBusca" ion-button round medium (click)="removerTodos()">
+      REMOVER TODOS
+    </button>
+    <button *ngIf="exibeCeps == 'naoExibir'" name="btnExibir" ion-button block medium (click)="exibirCeps('exibir')">
+      Exibir Ceps
+    </button>
+    <button *ngIf="exibeCeps == 'exibir'" name="btnEsconder" ion-button block medium (click)="exibirCeps('naoExibir')">
+      Esconder Ceps
+    </button>
+    <ion-item *ngIf="exibeCeps == 'exibir'">
       <ion-item *ngFor="let cep of regiao.ceps">
         <h3>CEP : {{cep.cep}}</h3>
         <h3>Nome rua : {{cep.nomeRua}}</h3>
         <ion-icon name="remove-circle" (click)="removeCepFromRegiao(cep)"></ion-icon>
       </ion-item>
-      <button name="btnBusca" ion-button round medium (click)="removerTodos()">
-          REMOVER TODOS
-      </button>
     </ion-item>
+
+  </ion-item>
 
 
 
@@ -61,27 +70,28 @@
     <ion-input [(ngModel)]="bairroBusca" name="bairroBusca"></ion-input>
   </ion-item>
 
-
-  
-  <ion-card *ngIf="cepsCompleto">
-      <ion-card-header>CEP</ion-card-header>
-      <ion-item *ngFor="let cep of cepsCompleto">
-          <h2>Cep : {{cep.cep}}</h2>
-          <h2>Nome do logradouro : {{cep.nomeRua}}</h2>
-          <ion-icon name="add-circle" (click)="addCepToRegiao(cep)"></ion-icon>
-      </ion-item>
-      <button name="btnBusca" ion-button round medium (click)="adicionarTodos()">
-          ADICIONAR TODOS
-      </button>
-  </ion-card>
-
   <button name="btnBusca" *ngIf="!cep && !ceps && !cepsCompleto" ion-button round medium (click)="busca()">
     Busca
   </button>
   <button name="btnNovaBusca" *ngIf="cep || ceps || cepsCompleto" ion-button round medium (click)="novaBusca()">
     Nova Busca
   </button>
-  <button name="btnBusca" ion-button round medium (click)="salvarAlteracao()">
-      SALVAR ALTERAÇÕES
+  <button name="btnSalvarAlteracoes" ion-button round medium (click)="salvarAlteracao()">
+    SALVAR ALTERAÇÕES
+  </button>
+
+  <ion-card *ngIf="cepsCompleto">
+    <ion-card-header>CEP</ion-card-header>
+    <button name="btnBusca" ion-button round medium (click)="adicionarTodos()">
+      ADICIONAR TODOS
     </button>
+    <ion-item *ngFor="let cep of cepsCompleto">
+      <h2>Cep : {{cep.cep}}</h2>
+      <h2>Nome do logradouro : {{cep.nomeRua}}</h2>
+      <ion-icon name="add-circle" (click)="addCepToRegiao(cep)"></ion-icon>
+    </ion-item>
+
+  </ion-card>
+
+
 </ion-content>

@@ -31,7 +31,7 @@ export class RegiaoUpdatePage {
   cep: cep;
   updateDescricao: string;
   modoBusca: string = '';
-
+  exibeCeps: string = 'naoExibir';
   cidades: Cidade[];
   estados: Estado[];
 
@@ -205,6 +205,10 @@ export class RegiaoUpdatePage {
     this.bairroBusca = '';
     this.modoBusca = '';
     this.cepsCompleto = undefined
+  }
+
+  exibirCeps(newModo: string) {
+    this.exibeCeps = newModo;
   }
 
 }

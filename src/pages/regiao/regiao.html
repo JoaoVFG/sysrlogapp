@@ -21,6 +21,9 @@
     <button *ngIf="exibeCeps == 'naoExibir'" name="btnExibir" ion-button block medium (click)="exibirCeps('exibir')">
       Exibir Ceps
     </button>
+    <button *ngIf="exibeCeps == 'exibir'" name="btnEsconder" ion-button block medium (click)="exibirCeps('naoExibir')">
+      Esconder Ceps
+    </button>
     <ion-item *ngIf="exibeCeps == 'exibir'">
       <ion-item *ngFor="let cep of regiao.ceps">
         <h2>Cep: {{cep.cep}}</h2>
@@ -30,9 +33,7 @@
       </ion-item>
     </ion-item>
 
-    <button *ngIf="exibeCeps == 'exibir'" name="btnEsconder" ion-button block medium (click)="exibirCeps('naoExibir')">
-      Esconder Ceps
-    </button>
+    
   </ion-card>
 
   <button *ngIf="!regiao && verificaPermissaoCriaRegiao()" name="btnCadastroRegiao" ion-button block medium (click)="cadastroRegiao()">
